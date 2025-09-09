@@ -1,0 +1,38 @@
+.card {
+  position: relative;
+  list-style: none;
+  width: 323px;
+  display: flex;
+  justify-content: center;
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+  margin: 0;
+  font-family: "CabinetGrotesk";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  opacity: 0.6;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 2px 12px;
+  border-radius: 4px;
+}
+
+.card__image {
+  height: 326px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 19px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.card__like {
+  left: -30px;
+  margin: 0;
+  background-color: transparent;
+  border-radius: 4px;
+  height: 15px;
+  width: 18px;
+}

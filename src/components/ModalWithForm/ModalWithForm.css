@@ -1,0 +1,116 @@
+.modal {
+  display: flex;
+  position: fixed;
+  background-color: #0000004d;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+}
+
+.modal_opened {
+  visibility: visible;
+}
+
+.modal__content {
+  position: relative;
+  background-color: #fff;
+  padding: 28px 28px 30px;
+  max-width: 496px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  background-image: url(./src/assets/close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.modal__submit {
+  width: fit-content;
+  height: 36px;
+  padding: 8px 16px;
+  margin: 0;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 1);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__submit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.signup__button {
+  margin: 0;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: .5;
+}
+
+.login__button {
+  margin: 0;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: .5;
+}
+
+.modal__title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 0 0 20px;
+}
+
+.modal__label {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+.modal__input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 10px 0 20px;
+}
+
+.modal__legend {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 1);
+  margin-bottom: 15px;
+}

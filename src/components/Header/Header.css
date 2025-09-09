@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  background: center / cover no-repeat #fff url(".../assets/header_image.jpg");
+  width: 1440px;
+  height: 576px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.header__title {
+  margin: 0;
+  font-family: "Roboto-Slab";
+  color: #fff;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 64px;
+}
+
+.header__caption {
+  margin: 0;
+  font-family: "Roboto";
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+

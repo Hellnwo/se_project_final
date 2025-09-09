@@ -1,68 +1,42 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@import url(./vendor/normalize.css);
+
+@font-face {
+  font-family: "Inter";
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  src: url("../src/vendor/inter-400-regular.woff") format("truetype");
 }
-
-a {
+@font-face {
+  font-family: "Inter";
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  src: url("../src/vendor/inter-500.woff") format("truetype");
 }
-a:hover {
-  color: #535bf2;
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  src: url("../src/vendor/roboto-500.woff") format("truetype");
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+@font-face {
+  font-family: "Roboto";
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  src: url("../src/vendor/roboto-400-regular.woff") format("truetype");
 }
-button:hover {
-  border-color: #646cff;
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  src: url("../src/vendor/roboto-700.woff") format("truetype");
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@font-face {
+  font-family: "Roboto";
+  font-weight: 900;
+  src: url("../src/vendor/roboto-900.woff") format("truetype");
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+@font-face {
+  font-family: "Roboto-Slab";
+  font-weight: 400;
+  src: url("../src/vendor/roboto-slab-400-regular.woff") format("truetype");
+}
+@font-face {
+  font-family: "Roboto-Slab";
+  font-weight: 700;
+  src: url("../src/vendor/roboto-slab-700-regular.woff") format("truetype");
 }
