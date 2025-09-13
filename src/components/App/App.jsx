@@ -1,97 +1,56 @@
-import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Route, Routes, useNavigation, Navigate } from "react-router-dom";
 
 import "./App.css";
-
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
+import SavedHeader from "../SavedHeader/SavedHeader";
 import SavedNews from "../SavedNews/SavedNews";
-import DeleteModal from "../DeleteModal/DeleteModal";
-import LoginModal from "../LoginModal/LoginModal";
-import RegisterModal from "../RegisterModal/RegisterModal";
 
-import { APIkey } from "../../utils/constants";
-import {
-  getItems,
-  deleteCard,
-  addCardLike,
-  removeCardLike,
-  getUserData,
-} from "../../utils/api";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { signup, signin, tokenCheck } from "../../utils/auth";
+import { getNewsArticles, saveNewsArticles } from "../../utils/NewsArticlesAPI";
+import { defaultArticles } from "../../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({
-    type: "",
-    temp: { F: 999, C: 999 },
-    city: "",
-    condition: "",
-    isDay: false,
-  });
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchedNewsArticles, setSearchedNewsArticles] = useState(false);
+  const [newsArticlesSearchedResults, setNewsArticlesSearchedResults] = useState([]);
+  const [savedNewsArticles, setSavedNewsArticles] = useState([]);
+  const [newsArticlesCounts, setNewsArticlesCounts] = useState(0);
 
   const navigate = useNavigate();
 
-  const openRegisterModal = () => {
-    setActiveModal("sign-up");
-  };
+  function handleSearchNewsArticles(news) {
+    console.log(news);
+    setIsLoading(true);
+    getNewsArticles({ keyword: news })
+    .then((res) => {
+        if (!searchedNewsArticles) {
+            setSearchedNewsArticles(true);
+        }
+        setNewsArticlesSearchedResults(res.articles);
+        setNewsArticlesCounts(3);
+    })
+    .catch((err) => {
+        console.error('There are no articles', err);
+        setNewsArticlesSearchedResults([]);
+            setSearchedNewsArticles(true);
+    })
+    .finally(() => {
+        setIsLoading(false);
+    });
+  }
 
-  const openLoginModal = () => {
-    setActiveModal("login");
-  };
-
-  const handleCardClick = (card) => {
-    setActiveModal("preview");
-    setSelectedCard(card);
-  };
-
-  const handleDeleteClick = () => {
-    setActiveModal("delete-confirm");
-  };
-
-  const closeActiveModal = () => {
-    setActiveModal("");
-  };
-
-  const switchToLoginModal = () => {
-    closeActiveModal();
-    setActiveModal("login");
-  };
-
-  const switchToSignUpModal = () => {
-    closeActiveModal();
-    setActiveModal("sign-up");
-  };
-
-  const handleSignOutClick = () => {
-    localStorage.removeItem("jwt");
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    navigate("/");
-  };
-
-  const handleTokenCheck = () => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      tokenCheck(token)
-        .then((res) => {
-          setCurrentUser(res);
-          setIsLoggedIn(true);
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoggedIn(false);
-        });
-    }
-  };
-
-  const handleSignIn = ({ email, password }) => {
+    const handleSignIn = ({ email, password }) => {
     signin(email, password)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
@@ -108,152 +67,139 @@ function App() {
     navigate("/");
   };
 
-  const handleCardLike = ({ id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
-    !isLiked
-      ? addCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard.data : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : removeCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard.data : item))
-            );
-          })
-          .catch((err) => console.log(err));
-  };
+  function handleSavedNewsArticles(article) {
+    if (!currentUser) {
+        return;
+    }
+    const checkIfSavedNewsArticles = savedNewsArticles.some(
+        (news) => news.title === article.title
+    );
+    console.log(checkIfSavedNewsArticles);
+    if (checkIfSavedNewsArticles) {
+        return;
+    }
+    savedNewsArticles(article).then(() => {
+        console.log(article);
+        console.log([...savedNewsArticles, article]);
+        setSavedNewsArticles([...savedNewsArticles, article]);
+    });
+  }
 
-  const handleRegisterModalSubmit = ({ email, password, name, avatarUrl }) => {
-    signup(email, password, name, avatarUrl)
-      .then((data) => {
-       localStorage.setItem("jwt", data.token);
-        setIsLoggedIn(true);
-        handleTokenCheck();
-        closeActiveModal();
-      })
-      .catch(console.error);
-  };
+  function handleDeleteNewsArticle(deletedArticle) {
+    const filteredNewsArticles = savedNewsArticles.filter((news) => {
+        console.log('this is the news', news);
+        console.log('deleted', deletedArticle);
+        return news.title !== deletedArticle.title;
+    });
+    console.log('filteredNewsArticles', filteredNewsArticles);
+    setSavedNewsArticles(filteredNewsArticles);
+  }
 
-  const handleSignInModalSubmit = ({ email, password }) => {
-    signin(email, password)
-      .then((data) => {
-        console.log(data);
-        localStorage.setItem("jwt", data.token);
-        getUserData().then((UserData) => {
-          setCurrentUser(UserData);
-          closeActiveModal();
-        });
-        setIsLoggedIn(true);
-      })
-      .catch(console.error);
-  };
-
-  const handleDeleteBtn = (id) => {
-    deleteCard(id)
-      .then(() => {
-        setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== id)
-        );
-        closeActiveModal();
-      })
-      .catch(console.error);
-  };
+  function handleNewsArticlesCounts() {
+    setNewsArticlesCounts((prevNews) => prevNews + 3);
+  }
+  const closeActiveModal = () => {
+    setActiveModal("");
+  }
+  const handleSignInModal = () => {
+    setActiveModal('sign-in');
+  }
+  const handleSignUpModal = () => {
+    setActiveModal('sign-up');
+  }
 
   useEffect(() => {
-    handleTokenCheck();
-  }, []);
+    if (!activeModal) return;
+    const handleEscClose = (evt) => {
+        if (evt.key === 'Escape') {
+            closeActiveModal();
+        }
+    };
+    const handleOverlay = (evt) => {
+        if (evt.target.classList.contains('modal_opened')) {
+            closeActiveModal();
+        }
+    };
+    document.addEventListener('keydown', handleEscClose);
+    document.addEventListener('mousedown', handleOverlay);
+    return () => {
+        document.removeEventListener('keydown', handleEscClose);
+        document.removeEventListener('mousedown', handleOverlay);
+    };
+}, [activeModal]);
 
-  useEffect(() => {
-    getWeather(coordinates, APIkey)
-      .then((data) => {
-        const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
-      })
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    getItems()
-      .then((data) => {
-        setClothingItems(data);
-      })
-      .catch(console.error);
-  }, []);
-
-  const ProtectedRoute = ({ isloggedIn, children }) => {
-    return isloggedIn ? children : <Navigate to="/" />;
-  };
-
-  return (
-      <CurrentUserContext.Provider
-        value={{ currentUser, isLoggedIn, handleSignOut }}
-      >
-        <div className="page">
-          <div className="page__content">
-            <Header
-              handleAddClick={handleAddClick}
-              username={currentUser?.name}
-              isLoggedIn={isLoggedIn}
-              handleRegisterClick={openRegisterModal}
-              handleLoginClick={openLoginModal}
-            />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Main
-                    weatherData={weatherData}
-                    handleCardClick={handleCardClick}
-                    handleCardLike={handleCardLike}
-                    clothingItems={clothingItems}
-                    onSignIn={handleSignIn}
-                  />
-                }
-              />
-              <Route
-                path="/saved-news"
-                element={
-                  <ProtectedRoute isloggedIn={isLoggedIn}>
-                    <SavedNews
-                      handleCardClick={handleCardClick}
-                      clothingItems={clothingItems}
-                      handleAddClick={handleAddClick}
-                      username={currentUser?.name}
-                      handleCardLike={handleCardLike}
-                      handleEditProfileClick={handleEditProfileClick}
-                      handleSignOutClick={handleSignOutClick}
-                    />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-            <Footer />
-          </div>
-          <DeleteModal
-            onClose={closeActiveModal}
-            isOpen={activeModal === "delete-confirm"}
-            onDeleteBtn={handleDeleteBtn}
-            itemId={selectedCard._id}
-          />
-          <LoginModal
-            isOpen={activeModal === "login"}
-            onClose={closeActiveModal}
-            switchToSignUp={switchToSignUpModal}
-            onLoginSubmit={handleSignInModalSubmit}
-          />
-          <RegisterModal
-            isOpen={activeModal === "sign-up"}
-            onClose={closeActiveModal}
-            switchToLogin={switchToLoginModal}
-            onRegisterModalSubmit={handleRegisterModalSubmit}
-          />
-        </div>
-      </CurrentUserContext.Provider>
-  );
+return (
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, }}>
+    <div className="app">
+    <div className="app__page">
+    <Routes>
+    <Route 
+    path='/'
+    element={
+      <>
+        <Header 
+        onSignInClick={}
+        onNewsArticlesSearched={}
+        isLoggedIn={}
+        onSignUpClick={}
+        handleSignOut={}
+        />
+        <Main 
+        cardList={}
+        isLoading={}
+        isLoggedIn={}
+        handleSavedNewsArticles={}
+        handleNewsArticlesCounts={}
+        searchedNewsArticles={}
+        handleDeletedNewsArticles={}
+        newsArticlesCountes={}
+        />
+        </>
+    }
+    />
+    <Route 
+    path='/saved-news'
+    element={
+      <>
+        <SavedHeader 
+        isLoggedIn={}
+        savedNewsArticles={}
+        handleSignOut={}
+        currentUser={}
+        newsArticlesCounts={}
+        />
+        <SavedNews 
+        isLoggedIn={}
+        savedNewsArticles={}
+        handleSavedNewsArticles={}
+        handleDeletedNewsArticles={}
+        searchedNewsArticles={}
+        handleNewsArticlesCounts={}
+        newsArticlesCounts={}
+        />
+        </>
+    }
+        />
+    </Routes>
+    <Footer />
+    <LoginModal 
+    isOpen={}
+    onClose={}
+    onSignInClick={}
+    onSignUpClick={}
+    handleSignIn={}
+    />
+    <RegisterModal
+    isOpen={}
+    onClose={}
+    onSignInClick={}
+    onSignUpClick={}
+    handleSignUp={}
+    />
+    </div>
+    </div>
+    </CurrentUserContext.Provider>
+);
 }
 
 export default App;

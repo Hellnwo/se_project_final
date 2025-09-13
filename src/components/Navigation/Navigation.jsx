@@ -1,53 +1,46 @@
 import "./navigation.css";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useLocation, Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import logouta from "../../assets/logouta";
+import logoutb from "../../assets/logoutb";
 
 function Navigation({
   isLoggedIn,
   handleLoginClick,
-  handleRegisterClick,
+  handleSignOutClick,
 }){
     const { currentUser } = useContext(CurrentUserContext);
+  const location = useLocation();
+  const isHomeArticles = location.pathname === "/";
+  const isSavedArticles = location.pathname == "/saved-news";
+
     return(
-<nav className="navigation">
-        {isLoggedIn ? (
-          <ul className="navigation__container">
-            <li>
-              <Link to="/saved-news" className="news__link">
-                <p className="header__username"> {currentUser?.name} </p>
-                {currentUser?.avatar ? (
-                  <img
-                    className="navigation__user"
-                    src={currentUser?.avatar || avatar}
-                    alt="user avatar"
-                  />
-                ) : (
-                  <span className="navigation__user navigation__user_type_none">
-                    {currentUser?.name?.toUpperCase().charAt(0) ||
-                      avatar.charAt(0)}
-                  </span>
-                )}
-              </Link>
-            </li>
-          </ul>
-        ) : (
-          <ul className="navigation__container">
-            <li>
-              <button
-                onClick={handleRegisterClick}
-                className="navigation__button"
-              >
-                Sign Up
-              </button>
-            </li>
-            <li>
-              <button className="navigation__button" onClick={handleLoginClick}>
-                Log In
-              </button>
-            </li>
-          </ul>
-        )}
+<nav className={`navigation ${isSavedArticles ? "nav_news-articles-saved" : ""}`}>
+  <Link to="/" className={`navigation__logo ${isSavedARticles ? "navigation__logo-saved-articles" : ""}`}>
+  NewsExplorer
+  </Link>
+  <div className="navigation__links">
+    <Link to="/" className={`navigation__links-home ${isSavedArticles ? "navigation__links-home-saved" : ""}`}>
+    Home
+    </Link>
+    {!isLoggedIn && isHomeArticles ? (
+      <button onClick={handleLoginClick} type="button" className="navigation__links-signin-btn">
+        Sign in
+      </button>
+    ) : (
+      <div className="Navigation__links-signin">
+        <Link to="/saved-news" className={`navigation__links-saved-articles ${isLoggedIn && isHomeArticles ? "navigation__links-saved-articles-home" : ""}`}>
+        Saved articles
+        </Link>
+        <button className={`navigation__links-signout-btn ${isLoggedIn && isHomeArticles ? "navigation__links-signout-btn-home" : ""}`} onClick={handleSignOutClick}>
+          {currentUser.username}
+          <img 
+          src={isLoggedIn && isHomeArticles ? logouta : logoutb} alt="signout btn" className="Navigation__Links-btn-img"
+          />
+        </button>
+      </div>
+    )}
+  </div>
       </nav>
     );
 }

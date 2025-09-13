@@ -1,31 +1,66 @@
 import { checkResponse } from "./api";
+import { APIkey } from "./constants";
 
-export const getWeather = ({ latitude, longitude }, APIkey) => {
+export const getArticles = ({ keyword }) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
-  ).then(checkResponse)
+    `https://newsapi.org/v2/everything?q=${keyword}&apikey=${APIkey}&from=${fromDate()}&to=${currentDate()}&pageSize=100`
+  ).then(checkResponse);
+};
+
+const currentDate = () => {
+  const date = new Date();
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+const fromDate = () => {
+  const date = new Date();
+  date.setDate(date.getDate() - 7);
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
+export function getSavedNewsarticles() {
+  return new Promise((res, reject) =>
+    res([
+      {
+        _id: "68c4d6457d7da285e5d0784d",
+        urlToImage: article.urlToImage,
+        publishedAt: article.publishedAt,
+        title: article.title,
+        description: article.description,
+        source: { name: article.source.name },
+        keyword: article.title,
+      },
+      {
+        _id: "68c4d656aad483b2a7268d86",
+        urlToImage: article.urlToImage,
+        publishedAt: article.publishedAt,
+        title: article.title,
+        description: article.description,
+        source: { name: article.source.name },
+        keyword: article.title,
+      },
+    ])
+  );
 }
 
-export const filterWeatherData = (data) => {
-  const result = {};
-  result.city = data.name;
-  result.temp = { F: Math.round(data.main.temp), C: Math.round(((data.main.temp - 32) * 5)/ 9), };
-  result.type = getWeatherType(result.temp.F);
-  result.condition = data.weather[0].main.toLowerCase();
-  result.isDay = isDay(data.sys, Date.now());
-  return result;
-};
-
-const isDay = ({ sunrise, sunset }, now) => {
-  return sunrise * 1000 < now && now < sunset * 1000;
-};
-
-const getWeatherType = (temperature) => {
-  if (temperature >= 86) {
-    return "hot";
-  } else if (temperature >= 66 && temperature < 88) {
-    return "warm";
-  } else {
-    return "cold";
-  }
-};
+export function saveNewsArticles(article) {
+  console.log(article);
+  return new Promise((res, reject) => {
+    res({
+      _id: "68c4d7a7bd725b5c7e2aa16d",
+      urlToImage: article.urlToImage,
+      publishedAt: article.publishedAt,
+      title: article.title,
+      description: article.description,
+      source: { name: article.source.name },
+      keyword: article.title,
+    });
+  });
+}
