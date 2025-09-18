@@ -23,7 +23,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchedNewsArticles, setSearchedNewsArticles] = useState(false);
-  const [newsArticlesSearchedResults, setNewsArticlesSearchedResults] = useState([]);
+  const [newsArticlesSearchedResults, setNewsArticlesSearchedResults] =
+    useState([]);
   const [savedNewsArticles, setSavedNewsArticles] = useState([]);
   const [newsArticlesCounts, setNewsArticlesCounts] = useState(0);
 
@@ -33,24 +34,24 @@ function App() {
     console.log(news);
     setIsLoading(true);
     getNewsArticles({ keyword: news })
-    .then((res) => {
+      .then((res) => {
         if (!searchedNewsArticles) {
-            setSearchedNewsArticles(true);
+          setSearchedNewsArticles(true);
         }
         setNewsArticlesSearchedResults(res.articles);
         setNewsArticlesCounts(3);
-    })
-    .catch((err) => {
-        console.error('There are no articles', err);
+      })
+      .catch((err) => {
+        console.error("There are no articles", err);
         setNewsArticlesSearchedResults([]);
-            setSearchedNewsArticles(true);
-    })
-    .finally(() => {
+        setSearchedNewsArticles(true);
+      })
+      .finally(() => {
         setIsLoading(false);
-    });
+      });
   }
 
-    const handleSignIn = ({ email, password }) => {
+  const handleSignIn = ({ email, password }) => {
     signin(email, password)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
@@ -69,29 +70,29 @@ function App() {
 
   function handleSavedNewsArticles(article) {
     if (!currentUser) {
-        return;
+      return;
     }
     const checkIfSavedNewsArticles = savedNewsArticles.some(
-        (news) => news.title === article.title
+      (news) => news.title === article.title
     );
     console.log(checkIfSavedNewsArticles);
     if (checkIfSavedNewsArticles) {
-        return;
+      return;
     }
     savedNewsArticles(article).then(() => {
-        console.log(article);
-        console.log([...savedNewsArticles, article]);
-        setSavedNewsArticles([...savedNewsArticles, article]);
+      console.log(article);
+      console.log([...savedNewsArticles, article]);
+      setSavedNewsArticles([...savedNewsArticles, article]);
     });
   }
 
   function handleDeleteNewsArticle(deletedArticle) {
     const filteredNewsArticles = savedNewsArticles.filter((news) => {
-        console.log('this is the news', news);
-        console.log('deleted', deletedArticle);
-        return news.title !== deletedArticle.title;
+      console.log("this is the news", news);
+      console.log("deleted", deletedArticle);
+      return news.title !== deletedArticle.title;
     });
-    console.log('filteredNewsArticles', filteredNewsArticles);
+    console.log("filteredNewsArticles", filteredNewsArticles);
     setSavedNewsArticles(filteredNewsArticles);
   }
 
@@ -100,106 +101,108 @@ function App() {
   }
   const closeActiveModal = () => {
     setActiveModal("");
-  }
+  };
   const handleSignInModal = () => {
-    setActiveModal('sign-in');
-  }
+    setActiveModal("sign-in");
+  };
   const handleSignUpModal = () => {
-    setActiveModal('sign-up');
-  }
+    setActiveModal("sign-up");
+  };
 
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (evt) => {
-        if (evt.key === 'Escape') {
-            closeActiveModal();
-        }
+      if (evt.key === "Escape") {
+        closeActiveModal();
+      }
     };
     const handleOverlay = (evt) => {
-        if (evt.target.classList.contains('modal_opened')) {
-            closeActiveModal();
-        }
+      if (evt.target.classList.contains("modal_opened")) {
+        closeActiveModal();
+      }
     };
-    document.addEventListener('keydown', handleEscClose);
-    document.addEventListener('mousedown', handleOverlay);
+    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("mousedown", handleOverlay);
     return () => {
-        document.removeEventListener('keydown', handleEscClose);
-        document.removeEventListener('mousedown', handleOverlay);
+      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("mousedown", handleOverlay);
     };
-}, [activeModal]);
+  }, [activeModal]);
 
-return (
-    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, }}>
-    <div className="app">
-    <div className="app__page">
-    <Routes>
-    <Route 
-    path='/'
-    element={
-      <>
-        <Header 
-        onSignInClick={}
-        onNewsArticlesSearched={}
-        isLoggedIn={}
-        onSignUpClick={}
-        handleSignOut={}
-        />
-        <Main 
-        cardList={}
-        isLoading={}
-        isLoggedIn={}
-        handleSavedNewsArticles={}
-        handleNewsArticlesCounts={}
-        searchedNewsArticles={}
-        handleDeletedNewsArticles={}
-        newsArticlesCountes={}
-        />
-        </>
-    }
-    />
-    <Route 
-    path='/saved-news'
-    element={
-      <>
-        <SavedHeader 
-        isLoggedIn={}
-        savedNewsArticles={}
-        handleSignOut={}
-        currentUser={}
-        newsArticlesCounts={}
-        />
-        <SavedNews 
-        isLoggedIn={}
-        savedNewsArticles={}
-        handleSavedNewsArticles={}
-        handleDeletedNewsArticles={}
-        searchedNewsArticles={}
-        handleNewsArticlesCounts={}
-        newsArticlesCounts={}
-        />
-        </>
-    }
-        />
-    </Routes>
-    <Footer />
-    <LoginModal 
-    isOpen={}
-    onClose={}
-    onSignInClick={}
-    onSignUpClick={}
-    handleSignIn={}
-    />
-    <RegisterModal
-    isOpen={}
-    onClose={}
-    onSignInClick={}
-    onSignUpClick={}
-    handleSignUp={}
-    />
-    </div>
-    </div>
+  return (
+    <CurrentUserContext.Provider
+      value={{ currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn }}
+    >
+      <div className="page">
+        <div className="page__content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Header
+                    onSignInClick={handleSignInModal}
+                    onNewsArticlesSearched={handleSearchNewsArticles}
+                    isLoggedIn={isLoggedIn}
+                    onSignUpClick={handleSignUpModal}
+                    handleSignOut={handleSignOut}
+                  />
+                  <Main
+                    cardList={newsArticlesSearchedResults}
+                    isLoading={isLoading}
+                    isLoggedIn={isLoggedIn}
+                    handleSavedNewsArticles={handleSavedNewsArticles}
+                    handleNewsArticlesCounts={handleNewsArticlesCounts}
+                    searchedNewsArticles={searchedNewsArticles}
+                    handleDeleteNewsArticles={handleDeleteNewsArticles}
+                    newsArticlesCounts={newsArticlesCounts}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/saved-news"
+              element={
+                <>
+                  <HeaderSavedNewsArticles
+                    isLoggedIn={isLoggedIn}
+                    savedNewsArticles={savedNewsArticles}
+                    handleSignOut={handleSignOut}
+                    currentUser={currentUser}
+                    newsArticlesCounts={newsArticlesCounts}
+                  />
+                  <MainSavedNewsArticles
+                    isLoggedIn={isLoggedIn}
+                    savedNewsArticles={savedNewsArticles}
+                    handleSavedNewsArticles={handleSavedNewsArticles}
+                    handleDeleteNewsArticles={handleDeleteNewsArticles}
+                    searchedNewsArticles={searchedNewsArticles}
+                    handleNewsArticlesCounts={handleNewsArticlesCounts}
+                    newsArticlesCounts={newsArticlesCounts}
+                  />
+                </>
+              }
+            />
+          </Routes>
+          <Footer />
+          <SignInModal
+            isOpen={activeModal === "sign-in"}
+            onClose={closeActiveModal}
+            onSignInClick={handleSignInModal}
+            onSignUpClick={handleSignUpModal}
+            handleSignIn={handleSignIn}
+          />
+          <SignUpModal
+            isOpen={activeModal === "sign-up"}
+            onClose={closeActiveModal}
+            onSignUpClick={handleSignUpModal}
+            onSignInClick={handleSignInModal}
+            handleSignUp={handleSignUp}
+          />
+        </div>
+      </div>
     </CurrentUserContext.Provider>
-);
+  );
 }
 
 export default App;

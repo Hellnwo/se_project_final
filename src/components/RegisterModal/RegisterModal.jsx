@@ -1,37 +1,38 @@
 import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import useForm from "../../hooks/useForm";
 
 export default function RegisterModal({
   onClose,
   isOpen,
-  onRegisterModalSubmit,
-  switchToLogin,
+  handleSignUp,
+  onSignInClick,
+  activeModal,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     setEmail("");
     setPassword("");
-    setName("");
-    setAvatarUrl("");
+    setUsername("");
   }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("form submitted");
-    onRegisterModalSubmit({ email, password, name, avatarUrl });
+    handleLogin({ email, password, name, avatarUrl });
   };
 
   return (
     <ModalWithForm
       title="Sign Up"
-      buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      activeModal={activeModal}
+      handleSignUp={handleSignUp}
     >
       <label className="modal__label">
         Email{" "}
@@ -39,11 +40,13 @@ export default function RegisterModal({
           type="email"
           className="modal__input"
           id="newemail"
-          placeholder="Email"
+          name="email"
+          placeholder="Enter email"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           value={email}
+          autoComplete="on"
           required
         />
       </label>
@@ -53,25 +56,29 @@ export default function RegisterModal({
           type="password"
           className="modal__input"
           id="newpassword"
-          placeholder="Password"
+          name="password"
+          placeholder="Enter password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           value={password}
+          autoComplete="on"
           required
         />
       </label>
       <label className="modal__label" htmlFor="newname">
-        Name{" "}
+        Username{" "}
         <input
           type="text"
           className="modal__input"
-          id="newname"
-          placeholder="Name"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
           onChange={(e) => {
             setName(e.target.value);
           }}
-          value={name}
+          value={username}
+          autoComplete="on"
           required
         />
       </label>
@@ -83,9 +90,16 @@ export default function RegisterModal({
         >
           Sign Up{" "}
         </button>
-        <button className="login__button" type="button" onClick={switchToLogin}>
-          or Sign In
+        <div className="modal__btn_section">
+        <p className="modal__btn-text">or</p>
+        <button
+          className="modal__btn_signup"
+          type="button"
+          onClick={onSignInClick}
+        >
+         Sign In
         </button>
+        </div>
       </div>
     </ModalWithForm>
   );

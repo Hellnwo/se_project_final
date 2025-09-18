@@ -5,10 +5,10 @@ import Navigation from "../Navigation";
 import SearchForm from "../SearchForm";
 
 function Header({
-  handleAddClick,
+  onSigninClick,
   isLoggedIn,
-  handleLoginClick,
-  handleRegisterClick,
+  handleSignOut,
+  onArticleSearch,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
 

@@ -1,0 +1,5 @@
+.articles__selected {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    gap: 15px;
+}

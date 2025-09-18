@@ -15,27 +15,27 @@ function Navigation({
   const isSavedArticles = location.pathname == "/saved-news";
 
     return(
-<nav className={`navigation ${isSavedArticles ? "nav_news-articles-saved" : ""}`}>
-  <Link to="/" className={`navigation__logo ${isSavedARticles ? "navigation__logo-saved-articles" : ""}`}>
+<nav className={`nav ${isSavedArticles ? "nav_news-articles-saved" : ""}`}>
+  <Link to="/" className={`nav__logo ${isSavedARticles ? "nav__logo-saved-articles" : ""}`}>
   NewsExplorer
   </Link>
-  <div className="navigation__links">
-    <Link to="/" className={`navigation__links-home ${isSavedArticles ? "navigation__links-home-saved" : ""}`}>
+  <div className="nav__links">
+    <Link to="/" className={`nav__links-home ${isSavedArticles ? "nav__links-home-saved" : ""}`}>
     Home
     </Link>
     {!isLoggedIn && isHomeArticles ? (
-      <button onClick={handleLoginClick} type="button" className="navigation__links-signin-btn">
+      <button onClick={handleLoginClick} type="button" className="nav__links-signin-btn">
         Sign in
       </button>
     ) : (
-      <div className="Navigation__links-signin">
-        <Link to="/saved-news" className={`navigation__links-saved-articles ${isLoggedIn && isHomeArticles ? "navigation__links-saved-articles-home" : ""}`}>
+      <div className="nav__links-signin">
+        <Link to="/saved-news" className={`nav__links-saved-articles ${isLoggedIn && isHomeArticles ? "nav__links-saved-articles-home" : ""}`}>
         Saved articles
         </Link>
-        <button className={`navigation__links-signout-btn ${isLoggedIn && isHomeArticles ? "navigation__links-signout-btn-home" : ""}`} onClick={handleSignOutClick}>
+        <button className={`nav__links-signout-btn ${isLoggedIn && isHomeArticles ? "nav__links-signout-btn-home" : ""}`} onClick={handleSignOutClick}>
           {currentUser.username}
           <img 
-          src={isLoggedIn && isHomeArticles ? logouta : logoutb} alt="signout btn" className="Navigation__Links-btn-img"
+          src={isLoggedIn && isHomeArticles ? logouta : logoutb} alt="signout btn" className="nav__Links-btn-img"
           />
         </button>
       </div>

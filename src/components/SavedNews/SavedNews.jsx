@@ -1,17 +1,30 @@
-import './SavedNews.css';
+import "./SavedNews.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import SavedHeader from '../SavedHeader/SavedHeader';
+import NewsCardArticles from "../NewsCardArticles/NewsCardArticles";
 
-function SavedNews(){
+function SavedNews({
+  isLoggedIn,
+  handleSavedNewsArticles,
+  savedNewsArticles = [],
+  searchedNewsArticles,
+  handleDeleteNewsArticles,
+  newsArticlesCounts,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
-  return(
-    <div>
-        <section>
-        <SavedHeader />
-        </section>
-    </div>
+  return (
+    <main className="main__saved-articles">
+      <NewsCardArticles
+        isLoggedIn={isLoggedIn}
+        currentUser={currentUser}
+        handleSavedNewsArticles={handleSavedNewsArticles}
+        savedNewsArticles={savedNewsArticles}
+        searchedNewsArticles={searchedNewsArticles}
+        handleDeleteNewsArticles={handleDeleteNewsArticles}
+        newsArticlesCounts={newsArticlesCounts}
+      />
+    </main>
   );
 }
 

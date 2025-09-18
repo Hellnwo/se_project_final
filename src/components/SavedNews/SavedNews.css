@@ -1,0 +1,13 @@
+.main__saved-articles {
+  padding-top: 64px;
+  padding-bottom: 46px;
+  background-color: rgba(245, 246, 247, 1);
+}
+
+@media screen and (max-width: 320px) {
+  .main__saved-articles {
+    padding-top: 24px;
+    padding-bottom: 12px;
+    background-color: rgba(245, 246, 247, 1);
+  }
+}

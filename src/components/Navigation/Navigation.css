@@ -1,50 +1,109 @@
-.navigation__container {
+.nav {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  padding: 30px, 104px, 26px;
+  border-bottom: 1px solid rgba(250, 250, 250, 1);
+  position: relative;
+  height: 80px;
 }
 
-.navigation__user {
-  width: 40px;
-  height: 40px;
-}
-
-.navigation__button {
-  margin-left: 20px;
-  bottom: 8px;
-  border-radius: 0;
-  background-color: transparent;
-  border: none;
-}
-
-.header__link {
+.nav__logo {
+  font-family: "Roboto Slab";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: rgba(250, 250, 250, 1);
   text-decoration: none;
-  color: black;
 }
 
-.header__button {
-  margin: 0 20px 0 auto;
+.nav__logo-saved-articles {
+  color: rgba(0, 0, 0, 1);
+}
+
+.nav_news-articles-saved {
+  background-color: rgba(250, 250, 250, 1);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 42px;
+}
+
+.nav__links-home {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(250, 250, 250, 1);
+  text-decoration: none;
   background: none;
   border: none;
-  cursor: pointer;
-  font-family: "CabinetGrotesk";
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
 }
 
-.header__username {
-  margin: 0;
-  font-family: "CabinetGrotesk";
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
+.nav__links-home-saved {
+  color: rgba(0, 0, 0, 1);
 }
 
-.profile__link {
+.nav__links-signin {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  gap: 50px;
+}
+
+.nav__links-saved-articles {
+  width: 114px;
+  height: 24px;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
   text-decoration: none;
-  color: #000000;
+  white-space: nowrap;
+}
+
+.nav__links-saved-articles-home {
+  color: rgba(250, 250, 250, 1);
+}
+
+.nav__links-signout-btn {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
+  border-radius: 100px;
+  width: 112px;
+  height: 40px;
+  background-color: transparent;
+}
+
+.nav__links-signin-btn {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
+  border-radius: 100px;
+  border: 1px solid rgba(250, 250, 250, 1);
+  padding: 12px 12px;
+  width: 176px;
+  height: 48px;
+  background: none;
+  cursor: pointer;
+}
+
+.nav__links-signout-btn-home {
+  border: 1px solid rgba(250, 250, 250, 1);
+  color: rgba(250, 250, 250, 1);
+  background-color: transparent;
+}
+
+.nav__Links-btn-img {
+  width: 16px;
+  height: 16px;
+  margin-left: 13px;
 }

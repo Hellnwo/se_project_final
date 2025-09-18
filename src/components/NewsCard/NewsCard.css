@@ -1,38 +1,241 @@
-.card {
-  position: relative;
-  list-style: none;
-  width: 323px;
+.newscard {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  max-height: 576px;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.card__name {
+.newscard__image {
+  max-height: 272px;
+  height: 100%;
+  object-fit: cover;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  overflow: hidden;
+}
+
+.newscard__save-btn {
+  background-image: url("../../images/bookmark.png");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 1);
+  width: 40px;
+  height: 40px;
   position: absolute;
-  top: 15px;
+  right: 24px;
+  top: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.newscard__save-btn:hover .newscard__save-btn-text {
+  display: flex;
+}
+
+.newscard__save-btn-text {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: -143px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  width: 142px;
+  height: 40px;
+  padding-top: 12px;
+  padding-left: 9px;
+  z-index: 1;
+  display: none;
+}
+
+.newscard__btn-bookmark-black {
+  background-image: url("../../assets/save_b.svg");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 1);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.newscard__btn-bookmark {
+  background-image: url("../../assets/save_m.svg");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 1);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.newscard__btn-bookmark:hover {
+  background-image: url("../../assets/save_h.svg");
+}
+
+.newscard__btn-and-keyword {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.newscard__keyword {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
+  position: absolute;
+  border-radius: 10px;
+  padding: 13px 8px;
+  z-index: 2;
+  top: 24px;
+  left: 24px;
+  max-width: 120px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.newscard__btn-to-delete {
+  background-image: url("../../assets/trash_a.svg");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 1);
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.newscard__btn-to-delete:hover {
+  background-image: url("../../assets/trash_h.svg");
+}
+
+.newscard__btn-to-delete-text {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
+  position: absolute;
+  padding: 8px 10px;
+  overflow: hidden;
+  top: 12px;
+  left: 12px;
+  transform: scale(1.02);
+}
+
+.newscard__btn-to-delete:hover .newscard__btn-to-delete-text {
+  display: block;
+}
+
+.newscard__content {
+  max-width: 100%;
+  text-align: left;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.newscard__content-date {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: rgba(182, 188, 191, 1);
+  vertical-align: middle;
+  max-width: 149px;
+  padding-top: 20px;
+  padding-bottom: 12px;
   margin: 0;
-  font-family: "CabinetGrotesk";
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.newscard__content-title {
+  font-family: "Roboto Slab";
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  white-space: normal;
+  color: rgba(26, 27, 34, 1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 352px;
+  width: 100%;
+  max-height: 88px;
+  padding-bottom: 16px;
+  margin: 0;
+}
+
+.newscard__content-decription {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: rgba(26, 27, 34, 1);
+  white-space: normal;
+  max-width: 352px;
+  max-height: 88px;
+  margin: 0;
+  padding-bottom: 30px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.newscard__content-source {
+  font-family: "Roboto Slab";
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  opacity: 0.6;
-  background-color: rgba(255, 255, 255, 1);
-  padding: 2px 12px;
-  border-radius: 4px;
-}
-
-.card__image {
-  height: 326px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 19px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.card__like {
-  left: -30px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(182, 188, 191, 1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 24px;
   margin: 0;
-  background-color: transparent;
-  border-radius: 4px;
-  height: 15px;
-  width: 18px;
+  max-width: 352px;
+  margin-top: auto;
 }

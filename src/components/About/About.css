@@ -1,38 +1,42 @@
 .about {
   display: flex;
-  padding: 100px 80px 173px;
-  background-color: #0a2850;
-  position: relative;
-  overflow: hidden;
-  justify-content: space-between;
-  z-index: 1;
-}
-
-.about__title {
-  margin: 0;
-  max-width: 251px;
-  color: #1A1B22;
-  font-family: "Roboto-Slab", 'Times New Roman', Times, serif;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 46px;
+  align-items: center;
+  gap: 56px;
+  padding: 80px 104px;
+  width: 100%
 }
 
 .about__content {
-  margin-top: 19px;
-  max-width: 660px;
-  color: #fff;
-  font-family: "Roboto-Slab", 'Times New Roman', Times, serif;
-  font-size: 20px;
-  line-height: 30px;
+  text-align: left;
+  width: 100%;
+  max-width: 600px;
 }
 
-.about__paragraph {
-  margin: 0 0 20px;
+.about__title {
+  font-family: "Roboto Slab";
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  margin-bottom: 24px;
+  height: auto;
+  color: rgba(26, 27, 34, 1);
 }
 
-.about__paragraph:last-of-type {
-  margin: 0;
+.about__caption {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  height: auto;
+  color: rgba(26, 27, 34, 1)
+}
+
+.about__image {
+  width: 464px;
+  height: 464px;
+  border-radius: 1000px;
+  border-image: round;
+  object-fit: cover;
 }
 
 .about__circle {
