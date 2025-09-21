@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./NewsCard.css";
-import defaultnewsimage from "../../images/defaultimage.jpg";
+import defaultnewsimage from "../../assets/deafaultImage.jpg";
 import { useLocation } from "react-router-dom";
-import { CurrentUserContext } from "../../Contexts/CurrentUserContexts";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function NewsCard({ item, handleDeleteNewsArticles, handleSavedNewsArticles }) {
   console.log(item);

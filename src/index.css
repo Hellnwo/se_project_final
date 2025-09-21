@@ -31,12 +31,12 @@
   src: url("../src/vendor/roboto-900.woff") format("truetype");
 }
 @font-face {
-  font-family: "Roboto-Slab";
+  font-family: "Roboto Slab";
   font-weight: 400;
   src: url("../src/vendor/roboto-slab-400-regular.woff") format("truetype");
 }
 @font-face {
-  font-family: "Roboto-Slab";
+  font-family: "Roboto Slab";
   font-weight: 700;
   src: url("../src/vendor/roboto-slab-700-regular.woff") format("truetype");
 }

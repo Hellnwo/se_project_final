@@ -1,21 +1,21 @@
 .header__saved {
-    color: rgba(0, 0, 0, 1);
-    background-color: rgba(250, 250, 250, 1);
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(250, 250, 250, 1);
 }
 
 .header__saved-section {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    align-items: flex-start;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 40px, 104px, 80px;
-    background-color: rgba(250, 250, 250, 1);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px, 104px, 80px;
+  background-color: rgba(250, 250, 250, 1);
 }
 
 .header__saved-title {
-    font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -26,7 +26,7 @@
 }
 
 .header__saved-caption {
-    font-family: "Roboto Slab";
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 40px;
   line-height: 46px;
@@ -37,7 +37,7 @@
 }
 
 .header__saved-keywords {
-    font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
@@ -47,7 +47,7 @@
 }
 
 .header__saved-span-keywords {
-    font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
@@ -56,18 +56,36 @@
 }
 
 @media screen and (max-width: 920px) {
-    .header__saved-section {
-        max-width: 596px;
-        padding: 40px 94px 60px;
-    }
-    .header__saved-title {
-        font-size: 30px;
-        line-height: 34px;
-    }
+  .header__saved {
+    background-color: rgba(250, 250, 250, 1);
+    max-width: 596px;
+    padding: 24px 40px 32px;
+    background-color: rgba(250, 250, 250, 1);
+  }
+
+  .header__saved-title {
+    font-size: 12px;
+    line-height: 24px;
+  }
+
+  .header__saved-caption {
+    font-size: 30px;
+    line-height: 34px;
+  }
 }
 
-@media screen and (max-width: 320px) {
-    .header__saved-section {
-        padding: 8px 16px 32px;
-    }
+@media screen and (max-width: 325px) {
+  .header__saved {
+    padding: 8px 16px 32px;
+  }
+
+  .header__saved-title {
+    font-size: 12px;
+    line-height: 24px;
+  }
+
+  .header__saved-caption {
+    font-size: 30px;
+    line-height: 34px;
+  }
 }

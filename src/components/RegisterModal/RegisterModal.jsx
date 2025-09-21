@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import './RegisterModal.css';
 import useForm from "../../hooks/useForm";
 
 export default function RegisterModal({
@@ -28,6 +29,7 @@ export default function RegisterModal({
   return (
     <ModalWithForm
       title="Sign Up"
+      name={"sign-up"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -91,14 +93,14 @@ export default function RegisterModal({
           Sign Up{" "}
         </button>
         <div className="modal__btn_section">
-        <p className="modal__btn-text">or</p>
-        <button
-          className="modal__btn_signup"
-          type="button"
-          onClick={onSignInClick}
-        >
-         Sign In
-        </button>
+          <p className="modal__btn-text">or</p>
+          <button
+            className="modal__btn_signup"
+            type="button"
+            onClick={onSignInClick}
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </ModalWithForm>

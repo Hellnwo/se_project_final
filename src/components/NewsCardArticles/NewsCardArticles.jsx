@@ -2,7 +2,7 @@ import './NewsCardArticles.css';
 import NewsCard from '../NewsCard/NewsCard';
 import { useLocation } from 'react-router-dom';
 
-function NewsCardArticles({
+ function NewsCardArticles({
     cardList, newsArticlesCounts, savedNewsArticles = [], handleSavedNewsArticles, handleDeleteNewsArticles,
 }) {
     const location = useLocation();
@@ -27,3 +27,5 @@ function NewsCardArticles({
         </div>
     );
 }
+
+export default NewsCardArticles;

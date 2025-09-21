@@ -1,5 +1,23 @@
 .articles__selected {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(auto, 1fr));
-    gap: 15px;
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding-left: 104px;
+  padding-right: 104px;
+}
+
+@media screen and (max-width: 780px) {
+  .articles__selected {
+    gap: 8px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .articles__selected {
+    flex-direction: column;
+    padding: 0 16px;
+  }
 }

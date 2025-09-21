@@ -1,8 +1,8 @@
 import "./Header.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import Navigation from "../Navigation";
-import SearchForm from "../SearchForm";
+import Navigation from "../Navigation/Navigation";
+import SearchForm from "../SearchForm/SearchForm";
 
 function Header({
   onSigninClick,

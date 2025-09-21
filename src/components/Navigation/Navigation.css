@@ -2,19 +2,20 @@
   display: flex;
   align-items: center;
   padding: 30px, 104px, 26px;
-  border-bottom: 1px solid rgba(250, 250, 250, 1);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.2);
   position: relative;
   height: 80px;
 }
 
 .nav__logo {
-  font-family: "Roboto Slab";
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0;
   color: rgba(250, 250, 250, 1);
   text-decoration: none;
+  margin-left: 105px;
 }
 
 .nav__logo-saved-articles {
@@ -29,11 +30,12 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+  margin-right: 105px;
   gap: 42px;
 }
 
 .nav__links-home {
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -56,7 +58,7 @@
 .nav__links-saved-articles {
   width: 114px;
   height: 24px;
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -70,7 +72,7 @@
 }
 
 .nav__links-signout-btn {
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -82,11 +84,11 @@
 }
 
 .nav__links-signin-btn {
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
-  color: rgba(0, 0, 0, 1);
+  color: rgba(250, 250, 250, 1);
   border-radius: 100px;
   border: 1px solid rgba(250, 250, 250, 1);
   padding: 12px 12px;
@@ -106,4 +108,70 @@
   width: 16px;
   height: 16px;
   margin-left: 13px;
+}
+
+.nav__mobile-menu-home-btn {
+  background-image: url(../../assets/menu.svg);
+  background-color: transparent;
+  width: 24px;
+  height: 24p;
+  display: none;
+  border: none;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.nav__mobile-menu-saved-btn {
+  background-image: url(../../assets/menus.svg);
+  background-color: transparent;
+  width: 24px;
+  height: 24p;
+  display: none;
+  border: none;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 770px) {
+  .nav {
+    padding: 0 40px;
+    justify-content: space-between;
+  }
+
+  .nav__links-signin-btn {
+    width: 152px;
+    height: 40px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .nav {
+    justify-content: space-between;
+    padding: 16px 16px;
+    height: 56px;
+  }
+
+  .nav__logo {
+    font-size: 16px;
+    height: 24px;
+    padding-left: 0;
+  }
+
+  .nav__links {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .nav__mobile-menu-home-btn {
+    visibility: visible;
+    display: flex;
+  }
+
+  .nav__mobile-menu-saved-btn {
+    visibility: visible;
+    display: flex;
+  }
 }

@@ -27,8 +27,9 @@
 }
 
 .modal__title {
-  margin: 0;
-  font-family: "Roboto";
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 20px;
@@ -57,4 +58,27 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 780px) {
+  .modal {
+    width: 100%;
+  }
 
+  .modal__form {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 595px) {
+  .modal {
+    align-items: flex-start;
+    margin-top: 56px;
+    z-index: 1002;
+  }
+
+  .modal__close {
+    width: 24px;
+    height: 24px;
+    top: -45px;
+    right: 25px;
+  }
+}

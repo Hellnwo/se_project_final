@@ -1,4 +1,4 @@
-import './SignUpSuccess<odal.css';
+import './SignUpSuccessModal.css';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 
 function SignUpSuccess({ isOpen, onClose, handleSignIn }) {
@@ -8,9 +8,12 @@ function SignUpSuccess({ isOpen, onClose, handleSignIn }) {
         title="Registration successfully completed!"
         isOpen={isOpen}
         onClose={onClose}
+        onSubmit={() => {
+            handleSignIn();
+        }}
         >
             <button
-            onSignIn={handleSignIn}
+            onClick={handleSignIn}
             className="modal__btn-submit modal__btn-success">
                 Sign in
             </button>

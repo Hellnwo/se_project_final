@@ -1,13 +1,16 @@
-.page {
-  display: flex;
-  justify-content: center;
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100vh;
   background-color: rgba(250, 250, 250, 1);
-  font-family: "Roboto", "Inter", "Roboto-Slab", "Times New Roman", Times, serif;
+  font-family: "Roboto", "Inter", "Roboto Slab", "Times New Roman", Times, serif;
 }
 
 .page__content {
@@ -15,4 +18,11 @@
   flex-direction: column;
   width: 100%;
   max-width: 1440px;
+}
+
+@media screen and (max-width: 770px) {
+  .app_page {
+    width: 100%;
+    max-width: 768px;
+  }
 }

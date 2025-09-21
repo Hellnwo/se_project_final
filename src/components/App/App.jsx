@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Route, Routes, useNavigation, Navigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -11,11 +11,11 @@ import SavedNews from "../SavedNews/SavedNews";
 
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import SignUpSuccessModal from "../SignUpSucessModal/SignUpSuccessModal";
 
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { signup, signin, tokenCheck } from "../../utils/auth";
-import { getNewsArticles, saveNewsArticles } from "../../utils/NewsArticlesAPI";
-import { defaultArticles } from "../../utils/constants";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { signUp, signIn, handleToken } from "../../utils/api";
+import { getArticles, saveArticles } from "../../utils/NewsAPI";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -30,10 +30,10 @@ function App() {
 
   const navigate = useNavigate();
 
-  function handleSearchNewsArticles(news) {
+  function handleArticleSearch(news) {
     console.log(news);
     setIsLoading(true);
-    getNewsArticles({ keyword: news })
+    getArticles({ keyword: news })
       .then((res) => {
         if (!searchedNewsArticles) {
           setSearchedNewsArticles(true);
@@ -51,20 +51,28 @@ function App() {
       });
   }
 
-  const handleSignIn = ({ email, password }) => {
-    signin(email, password)
-      .then((data) => {
-        localStorage.setItem("jwt", data.token);
-        setIsLoggedIn(true);
-        handleTokenCheck();
-      })
-      .catch(console.error);
+  function handleSignIn({ email, password, username }) {
+    setIsLoading(true);
+    console.log({ email, password, username});
+    setIsLoggedIn(true);
+    setCurrentUser({ email: email, username:username });
+    setIsLoading(false);
+    closeActiveModal
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem("jwt");
+  function handleSignUp({ email, password, username }) {
+    setIsLoading(true);
+    console.log({ email, password, username});
+    setIsLoggedIn(true);
+    setCurrentUser({ email: email, username:username });
+    setIsLoading(false);
+    closeActiveModal
+  }
+
+  function handleSignOut() {
     setIsLoggedIn(false);
     setCurrentUser(null);
+    setSavedNewsArticles([]);
     navigate("/");
   };
 
@@ -86,7 +94,7 @@ function App() {
     });
   }
 
-  function handleDeleteNewsArticle(deletedArticle) {
+  function handleDeleteNewsArticles(deletedArticle) {
     const filteredNewsArticles = savedNewsArticles.filter((news) => {
       console.log("this is the news", news);
       console.log("deleted", deletedArticle);
@@ -107,6 +115,10 @@ function App() {
   };
   const handleSignUpModal = () => {
     setActiveModal("sign-up");
+  };
+
+  const handleSignUpSuccessModal = () => {
+    setActiveModal("sign-up-successfully");
   };
 
   useEffect(() => {
@@ -142,7 +154,7 @@ function App() {
                 <>
                   <Header
                     onSignInClick={handleSignInModal}
-                    onNewsArticlesSearched={handleSearchNewsArticles}
+                    onArticleSearch={handleArticleSearch}
                     isLoggedIn={isLoggedIn}
                     onSignUpClick={handleSignUpModal}
                     handleSignOut={handleSignOut}
@@ -164,14 +176,14 @@ function App() {
               path="/saved-news"
               element={
                 <>
-                  <HeaderSavedNewsArticles
+                  <SavedHeader
                     isLoggedIn={isLoggedIn}
                     savedNewsArticles={savedNewsArticles}
                     handleSignOut={handleSignOut}
                     currentUser={currentUser}
                     newsArticlesCounts={newsArticlesCounts}
                   />
-                  <MainSavedNewsArticles
+                  <SavedNews
                     isLoggedIn={isLoggedIn}
                     savedNewsArticles={savedNewsArticles}
                     handleSavedNewsArticles={handleSavedNewsArticles}
@@ -185,19 +197,25 @@ function App() {
             />
           </Routes>
           <Footer />
-          <SignInModal
+          <LoginModal
             isOpen={activeModal === "sign-in"}
             onClose={closeActiveModal}
             onSignInClick={handleSignInModal}
             onSignUpClick={handleSignUpModal}
             handleSignIn={handleSignIn}
           />
-          <SignUpModal
+          <RegisterModal
             isOpen={activeModal === "sign-up"}
             onClose={closeActiveModal}
             onSignUpClick={handleSignUpModal}
             onSignInClick={handleSignInModal}
             handleSignUp={handleSignUp}
+            onSignUpSuccessModal={handleSignUpSuccessModal}
+          />
+          <SignUpSuccessModal 
+          isOpen={activeModal === "sign-up-successfully"}
+          isClose={closeActiveModal}
+          handSignIn={handleSignIn}
           />
         </div>
       </div>

@@ -1,27 +1,15 @@
 import "./SavedHeader.css";
-import React from "react";
+import { React, useContext } from "react";
 import Navigation from "../Navigation/Navigation";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function SavedHeader({ isLoggedIn, handleSignOut, savedArticles = [] }) {
+function SavedHeader({
+  isLoggedIn,
+  handleSignOut,
+  keywords,
+  savedArticles = [],
+}) {
   const { currentUser } = useContext(CurrentUserContext);
-
-  const keywordCounts = {};
-  savedArticles.forEach((n) => {
-    if (!n.keyword) {
-      return;
-    }
-    keywordCounts[n.keyword] = (keywordCounts[n.keyword] || 0) + 1;
-  });
-
-  const sortedKeywords = Object.entries(keywordCounts)
-    .sort(([, n], [, m]) => m - n)
-    .map(([keyword]) => keyword);
-
-  const formatSortedKeywords =
-    sortedKeywords.length > 3
-      ? '${sortedKeywords.slice(0, 3).join(", ")}, and ${sortedKeywords.length - 3} others'
-      : sortedKeywords.join(", ");
 
   return (
     <header className="header header__saved">
@@ -34,8 +22,11 @@ function SavedHeader({ isLoggedIn, handleSignOut, savedArticles = [] }) {
         <p className="header__saved-keywords">
           By keywords:{" "}
           <span className="header__saved-span-keywords">
-            {" "}
-            {formatSortedKeywords}{" "}
+            {keywords.length <= 2
+              ? keywords.join(", ")
+              : `${keywords[0]}, ${keywords[1]}, and ${
+                  keywords.length - 2
+                } others`}
           </span>
         </p>
       </div>

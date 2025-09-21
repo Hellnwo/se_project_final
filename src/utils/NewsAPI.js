@@ -25,7 +25,7 @@ const fromDate = () => {
   });
 };
 
-export function getSavedNewsarticles() {
+export function getSavedNewsArticles() {
   return new Promise((res, reject) =>
     res([
       {
@@ -50,7 +50,7 @@ export function getSavedNewsarticles() {
   );
 }
 
-export function saveNewsArticles(article) {
+export function saveArticles(article) {
   console.log(article);
   return new Promise((res, reject) => {
     res({

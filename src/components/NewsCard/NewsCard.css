@@ -41,7 +41,7 @@
 }
 
 .newscard__save-btn-text {
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 100%;
@@ -102,7 +102,7 @@
 }
 
 .newscard__keyword {
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
@@ -141,7 +141,7 @@
 }
 
 .newscard__btn-to-delete-text {
-  font-family: "Roboto";
+  font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 100%;
@@ -186,7 +186,7 @@
 }
 
 .newscard__content-title {
-  font-family: "Roboto Slab";
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 26px;
   line-height: 30px;
@@ -225,7 +225,7 @@
 }
 
 .newscard__content-source {
-  font-family: "Roboto Slab";
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
@@ -238,4 +238,165 @@
   margin: 0;
   max-width: 352px;
   margin-top: auto;
+}
+
+@media screen and (max-width: 770px) {
+  .newscard {
+    max-width: 100%;
+  }
+
+  .newscard__image {
+    max-height: 150px;
+  }
+
+  .newscard__save-btn {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .newscard__save-btn-text {
+    font-size: 10px;
+    padding-top: 8px;
+    padding-left: 6px;
+    width: 120px;
+    height: 32px;
+    left: -120px;
+  }
+
+  .newscard__btn-bookmark {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .newscard__btn-bookmark:hover {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .newscard__btn-and-keyword {
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .newscard__keyword {
+    font-size: 12px;
+    max-width: 100%;
+    left: 6px;
+    top: 14px;
+  }
+
+  .newscard__btn-to-delete {
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 14px;
+  }
+
+  .newscard__btn-to-delete-text {
+    font-size: 10px;
+    padding: 6px 8px;
+    width: 120px;
+    height: 24px;
+    left: -120px;
+  }
+
+  .newscard__content {
+    padding: 0 16px;
+  }
+
+  .newscard__content-title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .newscard__content-source {
+    font-size: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .newscard {
+    width: 288px;
+    max-height: none;
+  }
+  .newscard__image {
+    max-height: 196px;
+  }
+
+  .newscard__save-btn {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .newscard__save-btn-text {
+    font-size: 10px;
+    padding-top: 8px;
+    padding-left: 6px;
+    width: 120px;
+    height: 32px;
+    left: -120px;
+  }
+
+  .newscard__btn-bookmark {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .newscard__btn-bookmark:hover {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+  }
+  .newscard__btn-and-keyword {
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .newscard__keyword {
+    font-size: 14px;
+    line-height: 24px;
+    max-width: 100%;
+    left: 10px;
+    top: 14px;
+  }
+  .newscard__btn-to-delete {
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 14px;
+  }
+  .newscard__btn-to-delete-text {
+    font-size: 10px;
+    padding: 6px 8px;
+    width: 120px;
+    height: 24px;
+    left: -120px;
+  }
+
+  .newscard__content {
+    padding: 0 16px;
+  }
+
+  .newscard__content-title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .newscard__content-source {
+    font-size: 16px;
+    padding-bottom: 16px;
+  }
 }
