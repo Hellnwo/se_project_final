@@ -38,5 +38,5 @@
 @font-face {
   font-family: "Roboto Slab";
   font-weight: 700;
-  src: url("../src/vendor/roboto-slab-700-regular.woff") format("truetype");
+  src: url("../src/vendor/roboto-slab-700.woff") format("truetype");
 }
