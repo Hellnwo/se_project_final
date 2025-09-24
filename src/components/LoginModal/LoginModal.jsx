@@ -1,90 +1,93 @@
-import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import './LoginModal.css';
 import useForm from "../../hooks/useForm";
 
 export default function LoginModal({
-  onClose,
   isOpen,
+  activeModal,
+  onClose,
   handleSignIn,
   onSignUpClick,
   onSignInClick,
-  activeModal,
 }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+ const defaultValues = {
+    email: "",
+    password: "",
+  };
 
-  useEffect(() => {
-    setEmail("");
-    setPassword("");
-  }, [isOpen]);
+  const { values, isValid, errors, resetForm, handleChange } =
+    useForm(defaultValues);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("form submitted");
-    handleSignIn({ email, password });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (isValid) {
+      handleSignIn(values);
+    }
+    resetForm(defaultValues);
   };
 
   return (
     <ModalWithForm
-      title="Login"
-      name={"sign-in"}
+      title="Sign in"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       activeModal={activeModal}
-      handleSignIn={handleSignIn}
       onSignInClick={onSignInClick}
+      name={"sign-in"}
     >
-      <label className="modal__label">
-        Email{" "}
+      <label htmlFor="email" className="modal__label">
+        Email{""}
         <input
-          type="email"
+          type="text"
           className="modal__input"
           id="email"
           name="email"
           placeholder="Enter email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          value={email}
-          autoComplete="on"
           required
+          onChange={handleChange}
+          value={values.email || ""}
+          autoComplete="on"
         />
+        {errors.email && (
+          <span className="modal__errors">Invalid email address</span>
+        )}
       </label>
-      <label className="modal__label">
-        Password{" "}
+      <label htmlFor="password" className="modal__label">
+        Password{""}
         <input
-          type="password"
+          type="text"
           className="modal__input"
           id="password"
           name="password"
           placeholder="Enter password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          value={password}
-          autoComplete="on"
           required
+          onChange={handleChange}
+          value={values.password || ""}
+          autoComplete="on"
         />
+        {errors.password && (
+          <span className="modal__errors">Invalid password address</span>
+        )}
       </label>
-      <div className="modal__btn_container">
+      <div className="modal__btn-section">
         <button
-          className="modal__submit"
+          className={`modal__submit ${
+            !isValid ? "modal__submit_disabled" : ""
+          }`}
           type="submit"
-          disabled={!email || !password}
         >
-          Sign In
+          Sign in
         </button>
         <div className="modal__btn_section">
-        <p className="modal__btn-text">or</p>
-        <button
-          className="modal__btn_signup"
-          type="button"
-          onClick={onSignUpClick}
-        >
-         Sign Up
-        </button>
+          <p className="modal__btn-text">or</p>
+          <button
+            className="modal__sub-btn"
+            type="button"
+            onClick={onSignUpClick}
+          >
+            Sign up
+          </button>
         </div>
       </div>
     </ModalWithForm>

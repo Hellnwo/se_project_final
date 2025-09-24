@@ -1,38 +1,43 @@
 import "./navigation.css";
-import { useLocation, Link } from "react-router-dom";
-import { useContext } from 'react';
+import { useLocation, NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import logouta from "../../assets/logouta.svg";
 import logoutb from "../../assets/logoutb.svg";
+import BurgerMenuToggle from "../BurgerMenuToggle/BurgerMenuToggle";
 
-function Navigation({ isLoggedIn, handleLoginClick, handleSignOutClick }) {
+function Navigation({ onSignInClick, isLoggedIn, handleSignOut }) {
   const { currentUser } = useContext(CurrentUserContext);
   const location = useLocation();
   const isHomeArticles = location.pathname === "/";
   const isSavedArticles = location.pathname == "/saved-news";
 
+  const [isShowMobileMenu, setIsShowMobileMenu] = useState(false);
+  const toggleMobileMenu = () => setIsShowMobileMenu(!isShowMobileMenu);
+
   return (
     <nav className={`nav ${isSavedArticles ? "nav_news-articles-saved" : ""}`}>
-      <Link
+      <NavLink
         to="/"
         className={`nav__logo ${
           isSavedArticles ? "nav__logo-saved-articles" : ""
         }`}
       >
         NewsExplorer
-      </Link>
+      </NavLink>
+
       <div className="nav__links">
-        <Link
+        <NavLink
           to="/"
           className={`nav__links-home ${
-            isSavedArticles ? "nav__links-home-saved" : ""
+            isSavedArticles ? "nav__links-home_active" : ""
           }`}
         >
           Home
-        </Link>
+        </NavLink>
         {!isLoggedIn && isHomeArticles ? (
           <button
-            onClick={handleLoginClick}
+            onClick={onSignInClick}
             type="button"
             className="nav__links-signin-btn"
           >
@@ -40,23 +45,23 @@ function Navigation({ isLoggedIn, handleLoginClick, handleSignOutClick }) {
           </button>
         ) : (
           <div className="nav__links-signin">
-            <Link
+            <NavLink
               to="/saved-news"
               className={`nav__links-saved-articles ${
                 isLoggedIn && isHomeArticles
-                  ? "nav__links-saved-articles-home"
+                  ? "nav__links-saved-articles_active"
                   : ""
               }`}
             >
               Saved articles
-            </Link>
+            </NavLink>
             <button
               className={`nav__links-signout-btn ${
                 isLoggedIn && isHomeArticles
                   ? "nav__links-signout-btn-home"
                   : ""
               }`}
-              onClick={handleSignOutClick}
+              onClick={handleSignOut}
             >
               {currentUser.username}
               <img
@@ -68,6 +73,30 @@ function Navigation({ isLoggedIn, handleLoginClick, handleSignOutClick }) {
           </div>
         )}
       </div>
+      {currentUser && isHomeArticles && (
+        <button
+          className="nav__mobile-menu-home-btn"
+          onClick={toggleMobileMenu}
+        ></button>
+      )}
+      {isLoggedIn && currentUser && isSavedArticles && (
+        <button
+          className="nav__mobile-menu-saved-btn"
+          onClick={toggleMobileMenu}
+        ></button>
+      )}
+      {isShowMobileMenu && (
+        <BurgerMenuToggle
+          onSignInClick={onSignInClick}
+          isShowMobileMenu={isShowMobileMenu}
+          toggleMobileMenu={toggleMobileMenu}
+          handleSignout={handleSignOut}
+          isLoggedIn={isLoggedIn}
+          isHomeNewsArticlesPage={isHomeNewsArticlesPage}
+          isNewsArticlesSavedPage={isNewsArticlesSavedPage}
+          currentUser={currentUser?.username}
+        />
+      )}
     </nav>
   );
 }

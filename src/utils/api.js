@@ -8,7 +8,7 @@ export const checkResponse = (res) => {
 };
 
 export const handleRequest = (url, options = {}) => {
-  return fetch(url, options).then(handleResponse);
+  return fetch(url, options).then(checkResponse);
 };
 
 export const signIn = (email, password, username) => {
@@ -18,7 +18,7 @@ export const signIn = (email, password, username) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password, username }),
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
 
 export const signUp = (email, password, username) => {
@@ -28,7 +28,7 @@ export const signUp = (email, password, username) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password, username }),
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
 
 export const handleToken = (token) => {
@@ -38,5 +38,5 @@ export const handleToken = (token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then(handleResponse);
+  }).then(checkResponse);
 };

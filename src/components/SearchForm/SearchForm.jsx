@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ onArticleSearch }) {
+function SearchForm({ onNewsArticlesSearched }) {
     const [news, setNews] = useState("");
 
     const handleChange = (evt) => {
@@ -13,7 +13,7 @@ function SearchForm({ onArticleSearch }) {
         if (!news.trim()) {
             return;
         }
-        onArticleSearch(news);
+        onNewsArticlesSearched(news);
     };
 
   return (

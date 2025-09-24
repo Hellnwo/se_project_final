@@ -5,10 +5,10 @@ import Navigation from "../Navigation/Navigation";
 import SearchForm from "../SearchForm/SearchForm";
 
 function Header({
-  onSigninClick,
+  onSignInClick,
   isLoggedIn,
   handleSignOut,
-  onArticleSearch,
+  onNewsArticlesSearched,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -16,7 +16,7 @@ function Header({
     <header className="header">
       <div className="header__nav">
         <Navigation
-          onSigninClick={onSigninClick}
+          onSignInClick={onSignInClick}
           currentUser={currentUser}
           handleSignOut={handleSignOut}
           isLoggedIn={isLoggedIn}
@@ -28,7 +28,7 @@ function Header({
           Find the latest news on any topic and save them in your personal
           account.
         </h2>
-        <SearchForm onArticleSearch={onArticleSearch} />
+        <SearchForm onNewsArticlesSearched={onNewsArticlesSearched} />
       </div>
     </header>
   );

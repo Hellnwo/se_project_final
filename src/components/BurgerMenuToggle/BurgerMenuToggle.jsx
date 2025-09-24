@@ -1,7 +1,7 @@
 import "./BurgerMenuToggle.css";
 import { Link } from "react-router-dom";
 import close from "../../assets/close.svg";
-import { CurrentUserContext } from "../../Contexts/CurrentUserContexts";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 import logouta from "../../assets/logouta.svg";
 

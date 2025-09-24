@@ -1,105 +1,104 @@
-import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import './RegisterModal.css';
 import useForm from "../../hooks/useForm";
 
 export default function RegisterModal({
-  onClose,
-  isOpen,
-  handleSignUp,
-  onSignInClick,
+   isOpen,
   activeModal,
+  onClose,
+  handleSignUp,
+  onSuccessfulSignUpModal,
+  onSignInClick
 }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    setEmail("");
-    setPassword("");
-    setUsername("");
-  }, [isOpen]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("form submitted");
-    handleLogin({ email, password, name, avatarUrl });
+   const defaultValues = {
+    email: "",
+    password: "",
+    username: "",
   };
 
+  const { values, isValid, errors, resetForm, handleChange } =
+    useForm(defaultValues);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (isValid) {
+      handleSignUp(values);
+    }
+    resetForm(defaultValues);
+  };
   return (
     <ModalWithForm
-      title="Sign Up"
-      name={"sign-up"}
+      title="Sign up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       activeModal={activeModal}
-      handleSignUp={handleSignUp}
     >
-      <label className="modal__label">
-        Email{" "}
+      <label htmlFor="email" className="modal__label">
+        Email{""}
         <input
-          type="email"
+          type="text"
           className="modal__input"
-          id="newemail"
+          id="_email"
           name="email"
           placeholder="Enter email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          value={email}
-          autoComplete="on"
           required
+          onChange={handleChange}
+          value={values.email || ""}
+          autoComplete="on"
         />
       </label>
-      <label className="modal__label">
-        Password{" "}
+      <label htmlFor="password" className="modal__label">
+        Password{""}
         <input
-          type="password"
+          type="text"
           className="modal__input"
-          id="newpassword"
+          id="_password"
           name="password"
           placeholder="Enter password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          value={password}
-          autoComplete="on"
           required
+          onChange={handleChange}
+          value={values.password || ""}
+          autoComplete="on"
         />
       </label>
-      <label className="modal__label" htmlFor="newname">
-        Username{" "}
+      <label htmlFor="username" className="modal__label">
+        Username{""}
         <input
           type="text"
           className="modal__input"
           id="username"
           name="username"
           placeholder="Enter your username"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          value={username}
-          autoComplete="on"
           required
+          onChange={handleChange}
+          value={values.username || ""}
+          autoComplete="on"
         />
       </label>
-      <div className="button__container">
+      {errors.email && (
+        <span className="modal__errors modal__errors-signup">
+          Invalid email address
+        </span>
+      )}
+      <div className="modal__btn_section">
         <button
+          className={`modal__submit ${
+            !isValid ? "modal__submit_disabled" : ""
+          }`}
           type="submit"
-          className="modal__submit"
-          disabled={!email || !password || !name || !avatarUrl}
+          onClick={onSuccessfulSignUpModal}
         >
-          Sign Up{" "}
+          Sign up
         </button>
-        <div className="modal__btn_section">
+        <div className="modal__btn-section">
           <p className="modal__btn-text">or</p>
           <button
-            className="modal__btn_signup"
+            className="modal__sub-btn"
             type="button"
             onClick={onSignInClick}
           >
-            Sign In
+            Sign in
           </button>
         </div>
       </div>

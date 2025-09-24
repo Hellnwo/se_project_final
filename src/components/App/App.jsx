@@ -15,23 +15,30 @@ import SignUpSuccessModal from "../SignUpSucessModal/SignUpSuccessModal";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { signUp, signIn, handleToken } from "../../utils/api";
+import { checkFakeToken } from "../../utils/auth";
 import { getArticles, saveArticles } from "../../utils/NewsAPI";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [searchedNewsArticles, setSearchedNewsArticles] = useState(false);
   const [newsArticlesSearchedResults, setNewsArticlesSearchedResults] =
     useState([]);
   const [savedNewsArticles, setSavedNewsArticles] = useState([]);
   const [newsArticlesCounts, setNewsArticlesCounts] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const [keywords, setKeywords] = useState([]);
 
   const navigate = useNavigate();
 
-  function handleArticleSearch(news) {
-    console.log(news);
+
+  function handleSearchNewsArticles(news) {
+    console.log("this is the news", news);
+    setKeyword(news);
+    setKeywords([...keywords, news]);
+
     setIsLoading(true);
     getArticles({ keyword: news })
       .then((res) => {
@@ -41,8 +48,8 @@ function App() {
         setNewsArticlesSearchedResults(res.articles);
         setNewsArticlesCounts(3);
       })
-      .catch((err) => {
-        console.error("There are no articles", err);
+      .catch((error) => {
+        console.error("There are no articles", error);
         setNewsArticlesSearchedResults([]);
         setSearchedNewsArticles(true);
       })
@@ -53,33 +60,34 @@ function App() {
 
   function handleSignIn({ email, password, username }) {
     setIsLoading(true);
-    console.log({ email, password, username});
+    console.log({ email, password, username });
     setIsLoggedIn(true);
-    setCurrentUser({ email: email, username:username });
+    setCurrentUser({ email: email, username: username });
     setIsLoading(false);
-    closeActiveModal
-  };
+    closeActiveModal();
+  }
 
   function handleSignUp({ email, password, username }) {
     setIsLoading(true);
-    console.log({ email, password, username});
+    console.log({ email, password, username });
     setIsLoggedIn(true);
-    setCurrentUser({ email: email, username:username });
+    setCurrentUser({ email: email, username: username });
     setIsLoading(false);
-    closeActiveModal
+    closeActiveModal();
   }
 
   function handleSignOut() {
     setIsLoggedIn(false);
-    setCurrentUser(null);
+    setCurrentUser({});
     setSavedNewsArticles([]);
     navigate("/");
-  };
+  }
 
   function handleSavedNewsArticles(article) {
     if (!currentUser) {
       return;
     }
+    console.log(keyword);
     const checkIfSavedNewsArticles = savedNewsArticles.some(
       (news) => news.title === article.title
     );
@@ -87,7 +95,9 @@ function App() {
     if (checkIfSavedNewsArticles) {
       return;
     }
-    savedNewsArticles(article).then(() => {
+
+    article.keyword = keyword;
+    saveArticles(article).then(() => {
       console.log(article);
       console.log([...savedNewsArticles, article]);
       setSavedNewsArticles([...savedNewsArticles, article]);
@@ -97,9 +107,10 @@ function App() {
   function handleDeleteNewsArticles(deletedArticle) {
     const filteredNewsArticles = savedNewsArticles.filter((news) => {
       console.log("this is the news", news);
-      console.log("deleted", deletedArticle);
+      console.log("u deleted me", deletedArticle);
       return news.title !== deletedArticle.title;
     });
+
     console.log("filteredNewsArticles", filteredNewsArticles);
     setSavedNewsArticles(filteredNewsArticles);
   }
@@ -107,12 +118,17 @@ function App() {
   function handleNewsArticlesCounts() {
     setNewsArticlesCounts((prevNews) => prevNews + 3);
   }
+
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
+
   const handleSignInModal = () => {
     setActiveModal("sign-in");
+    console.log("modal");
   };
+
   const handleSignUpModal = () => {
     setActiveModal("sign-up");
   };
@@ -121,6 +137,14 @@ function App() {
     setActiveModal("sign-up-successfully");
   };
 
+
+  useEffect(() => {
+    checkFakeToken().then(({ data }) => {
+      setCurrentUser(data);
+    });
+  }, [isLoggedIn]);
+
+ 
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (evt) => {
@@ -140,7 +164,7 @@ function App() {
       document.removeEventListener("mousedown", handleOverlay);
     };
   }, [activeModal]);
-
+console.log(activeModal);
   return (
     <CurrentUserContext.Provider
       value={{ currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn }}
@@ -154,10 +178,12 @@ function App() {
                 <>
                   <Header
                     onSignInClick={handleSignInModal}
-                    onArticleSearch={handleArticleSearch}
+                    onNewsArticlesSearched={handleSearchNewsArticles}
                     isLoggedIn={isLoggedIn}
                     onSignUpClick={handleSignUpModal}
                     handleSignOut={handleSignOut}
+                    keywords={keywords}
+                    activeModal={activeModal}
                   />
                   <Main
                     cardList={newsArticlesSearchedResults}
@@ -168,6 +194,7 @@ function App() {
                     searchedNewsArticles={searchedNewsArticles}
                     handleDeleteNewsArticles={handleDeleteNewsArticles}
                     newsArticlesCounts={newsArticlesCounts}
+                    keywords={keywords}
                   />
                 </>
               }
@@ -182,6 +209,7 @@ function App() {
                     handleSignOut={handleSignOut}
                     currentUser={currentUser}
                     newsArticlesCounts={newsArticlesCounts}
+                    keywords={keywords}
                   />
                   <SavedNews
                     isLoggedIn={isLoggedIn}
@@ -191,6 +219,7 @@ function App() {
                     searchedNewsArticles={searchedNewsArticles}
                     handleNewsArticlesCounts={handleNewsArticlesCounts}
                     newsArticlesCounts={newsArticlesCounts}
+                    keywords={keywords}
                   />
                 </>
               }
@@ -210,17 +239,18 @@ function App() {
             onSignUpClick={handleSignUpModal}
             onSignInClick={handleSignInModal}
             handleSignUp={handleSignUp}
-            onSignUpSuccessModal={handleSignUpSuccessModal}
+            onSuccessfulSignUpModal={handleSignUpSuccessModal}
           />
-          <SignUpSuccessModal 
-          isOpen={activeModal === "sign-up-successfully"}
-          isClose={closeActiveModal}
-          handSignIn={handleSignIn}
+          <SignUpSuccessModal
+            isOpen={activeModal === "sign-up-successfully"}
+            onClose={closeActiveModal}
+            handleSignIn={handleSignIn}
           />
         </div>
       </div>
     </CurrentUserContext.Provider>
   );
 }
+
 
 export default App;

@@ -1,5 +1,5 @@
 .articles__selected {
-    display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
