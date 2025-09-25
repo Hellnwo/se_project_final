@@ -21,7 +21,7 @@
 }
 
 .newscard__save-btn {
-  background-image: url("../../assets/save_b.svg");
+  background-image: url(../../assets/save_b.svg);
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
@@ -60,7 +60,7 @@
 }
 
 .newscard__btn-bookmark-black {
-  background-image: url("../../assets/save_h.svg");
+  background-image: url(../../assets/save_h.svg);
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
@@ -76,7 +76,7 @@
 }
 
 .newscard__btn-bookmark {
-  background-image: url("../../assets/save_m.svg");
+  background-image: url(../../assets/save_m.svg);
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
@@ -92,7 +92,7 @@
 }
 
 .newscard__btn-bookmark:hover {
-  background-image: url("../../assets/save_h.svg");
+  background-image: url(../../assets/save_h.svg);
 }
 
 .newscard__btn-and-keyword {
@@ -121,7 +121,7 @@
 }
 
 .newscard__btn-to-delete {
-  background-image: url("../../assets/trash_a.svg");
+  background-image: url(../../assets/trash_a.svg);
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
@@ -137,7 +137,7 @@
 }
 
 .newscard__btn-to-delete:hover {
-  background-image: url("../../assets/trash_h.svg");
+  background-image: url(../../assets/trash_h.svg);
 }
 
 .newscard__btn-to-delete-text {
