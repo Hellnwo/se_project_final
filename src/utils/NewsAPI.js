@@ -2,9 +2,11 @@ import { checkResponse } from "./api";
 import { APIkey } from "./constants";
 
 export const getArticles = ({ keyword }) => {
-  return fetch(
-    `https://newsapi.org/v2/everything?q=${keyword}&apikey=${APIkey}&from=${fromDate()}&to=${currentDate()}&pageSize=100`
-  ).then(checkResponse);
+  const url =
+  process.env.NODE_ENV === "production" 
+  ? `https://nomoreparties.co/news/v2/everything?q=${keyword}&apikey=${APIkey}&from=${fromDate()}&to=${currentDate()}&pageSize=100`
+  : `https://newsapi.org/v2/everything?q=${keyword}&apikey=${APIkey}&from=${fromDate()}&to=${currentDate()}&pageSize=100`;
+  return checkResponse(url);
 };
 
 const currentDate = () => {
