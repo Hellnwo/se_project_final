@@ -91,7 +91,7 @@ export default function RegisterModal({
         >
           Sign up
         </button>
-        <div className="modal__btn-section">
+        <div className="modal__btn_section">
           <p className="modal__btn-text">or</p>
           <button
             className="modal__sub-btn"
