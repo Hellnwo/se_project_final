@@ -1,4 +1,4 @@
-import { checkResponse } from "./api";
+import { handleRequest } from "./api";
 import { APIkey } from "./constants";
 
 export const getArticles = ({ keyword }) => {
@@ -6,7 +6,7 @@ export const getArticles = ({ keyword }) => {
   process.env.NODE_ENV === "production" 
   ? `https://nomoreparties.co/news/v2/everything?q=${keyword}&apikey=${APIkey}&from=${fromDate()}&to=${currentDate()}&pageSize=100`
   : `https://newsapi.org/v2/everything?q=${keyword}&apikey=${APIkey}&from=${fromDate()}&to=${currentDate()}&pageSize=100`;
-  return checkResponse(url);
+  return handleRequest(url);
 };
 
 const currentDate = () => {
@@ -28,7 +28,7 @@ const fromDate = () => {
 };
 
 export function getSavedNewsArticles(article) {
-  return new Promise((res) =>
+  return new Promise((res, reject) =>
     res([
       {
         _id: "68c4d6457d7da285e5d0784d",
@@ -54,7 +54,7 @@ export function getSavedNewsArticles(article) {
 
 export function saveArticles(article) {
   console.log(article);
-  return new Promise((res) => {
+  return new Promise((res, reject) => {
     res({
       _id: "68c4d7a7bd725b5c7e2aa16d",
       urlToImage: article.urlToImage,

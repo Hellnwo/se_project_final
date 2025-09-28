@@ -48,8 +48,8 @@ function App() {
         setNewsArticlesSearchedResults(res.articles);
         setNewsArticlesCounts(3);
       })
-      .catch((error) => {
-        console.error("There are no articles", error);
+      .catch((err) => {
+        console.error("There are no articles", err);
         setNewsArticlesSearchedResults([]);
         setSearchedNewsArticles(true);
       })
