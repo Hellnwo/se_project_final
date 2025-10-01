@@ -109,11 +109,10 @@
   background-color: rgba(255, 255, 255, 1);
   position: absolute;
   border-radius: 10px;
-  padding: 13px 8px;
+  padding: 3px 7px;
   z-index: 2;
   top: 24px;
   left: 24px;
-  max-width: 120px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -126,8 +125,8 @@
   width: 24px;
   height: 24px;
   position: absolute;
-  right: 12px;
-  top: 12px;
+  right: 24px;
+  top: 24px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -150,9 +149,13 @@
   position: absolute;
   padding: 8px 10px;
   overflow: hidden;
-  top: 12px;
-  left: 12px;
+  top: 0px;
+  left: -145px;
   transform: scale(1.02);
+  display: none;
+  width: 140px;
+  height: 30px;
+  z-index: 1;
 }
 
 .newscard__btn-to-delete:hover .newscard__btn-to-delete-text {
@@ -195,23 +198,19 @@
   -webkit-box-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 352px;
   width: 100%;
-  max-height: 88px;
   padding-bottom: 16px;
   margin: 0;
 }
 
 .newscard__content-decription {
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif, serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0px;
   color: rgba(26, 27, 34, 1);
   white-space: normal;
-  max-width: 352px;
-  max-height: 88px;
   margin: 0;
   padding-bottom: 30px;
   display: -webkit-box;
@@ -233,7 +232,6 @@
   text-overflow: ellipsis;
   padding-bottom: 24px;
   margin: 0;
-  max-width: 352px;
   margin-top: auto;
 }
 

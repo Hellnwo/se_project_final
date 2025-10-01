@@ -9,8 +9,8 @@ function BurgerMenuToggle({
   isShowMobileMenu,
   onSignInClick,
   toggleMobileMenu,
-  isNewsArticlesSavedPage,
-  isHomeNewsArticlesPage,
+  isSavedArticles,
+  isHomeArticles,
   handleSignout,
   isLoggedIn,
 }) {
@@ -42,7 +42,7 @@ function BurgerMenuToggle({
             <Link
               to="/"
               className={`nav-mobile-menu__link ${
-                isHomeNewsArticlesPage ? "nav-mobile-menu__link_home" : ""
+                isHomeArticles ? "nav-mobile-menu__link_home" : ""
               }`}
             >
               Home
@@ -52,7 +52,7 @@ function BurgerMenuToggle({
             <Link
               to="/saved-news"
               className={`nav-mobile-menu__link ${
-                isNewsArticlesSavedPage
+                isSavedArticles
                   ? "nav-mobile-menu__link_saved"
                   : ""
               }`}
@@ -67,7 +67,7 @@ function BurgerMenuToggle({
             <Link
               to="/"
               className={`nav-mobile-menu__link ${
-                isHomeNewsArticlesPage ? "nav-mobile-menu__link_home" : ""
+                isHomeArticles ? "nav-mobile-menu__link_home" : ""
               }`}
             >
               Home

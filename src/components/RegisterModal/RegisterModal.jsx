@@ -1,31 +1,38 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import './RegisterModal.css';
-import useForm from "../../hooks/useForm";
+import "./RegisterModal.css";
+import React, {useEffect} from "react";
+import useFormValidation from "../../hooks/useForm";
 
 export default function RegisterModal({
-   isOpen,
+  isOpen,
   activeModal,
   onClose,
   handleSignUp,
   onSuccessfulSignUpModal,
-  onSignInClick
+  onSignInClick,
 }) {
-   const defaultValues = {
+  const defaultValues = {
     email: "",
     password: "",
     username: "",
   };
 
-  const { values, isValid, errors, resetForm, handleChange } =
-    useForm(defaultValues);
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormValidation(defaultValues);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
     if (isValid) {
       handleSignUp(values);
     }
-    resetForm(defaultValues);
+
+    useEffect(() => {
+      if (isOpen) {
+        resetForm(defaultValues);
+      }
+    }, [isOpen]);
   };
+
   return (
     <ModalWithForm
       title="Sign up"

@@ -1,9 +1,10 @@
 .circle-preloader {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 74px;
   width: 100%;
-  min-height: 300px;
+  min-height: 282px;
+  max-width: 1440px;
   position: relative;
   justify-content: center;
 }

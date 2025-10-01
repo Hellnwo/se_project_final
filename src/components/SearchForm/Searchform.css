@@ -1,3 +1,11 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .form__search {
   display: flex;
   position: relative;
@@ -14,10 +22,13 @@
   font-family: "Roboto", "Times New Roman", Times, serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 22px;
+  width: 100%;
   padding-left: 24px;
   border-radius: 100px;
+  border: 1px solid rgba(209, 210, 214, 1);
   border: none;
+  outline: none;
   color: rgba(26, 27, 34, 1);
 }
 
@@ -30,12 +41,24 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
-  padding-left: 24px;
   width: 168px;
+  height: 64px;
   border-radius: 100px;
   border: none;
   background-color: rgba(47, 113, 229, 1);
   color: rgba(250, 250, 250, 1);
+  cursor: pointer;
+}
+
+.form__search-btn:hover {
+  background-color: rgba(52, 126, 255, 1);
+  box-shadow: 0 4px 7px rgba(52, 126, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.form__search-btn:active {
+  background-color: rgba(42, 101, 204, 1);
+  transform: scale(0.98);
 }
 
 @media screen and (max-width: 780px) {

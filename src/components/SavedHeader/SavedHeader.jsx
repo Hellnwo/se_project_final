@@ -7,7 +7,7 @@ function SavedHeader({
   isLoggedIn,
   handleSignOut,
   keywords,
-  savedArticles = [],
+  savedNewsArticles = [],
 }) {
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -17,7 +17,7 @@ function SavedHeader({
       <div className="header__saved-section">
         <h2 className="header__saved-title">Saved articles</h2>
         <p className="header__saved-caption">
-          {currentUser.username}, you have {savedArticles.length} saved articles{" "}
+          {currentUser.username}, you have {savedNewsArticles.length} saved articles{" "}
         </p>
         <p className="header__saved-keywords">
           By keywords:{" "}

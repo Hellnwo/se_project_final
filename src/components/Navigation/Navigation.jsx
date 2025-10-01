@@ -5,6 +5,8 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import logouta from "../../assets/logouta.svg";
 import logoutb from "../../assets/logoutb.svg";
 import BurgerMenuToggle from "../BurgerMenuToggle/BurgerMenuToggle";
+import menubtn from "../../assets/menu.svg";
+import menubtns from "../../assets/menus.svg";
 
 function Navigation({ onSignInClick, isLoggedIn, handleSignOut }) {
   const { currentUser } = useContext(CurrentUserContext);
@@ -77,13 +79,17 @@ function Navigation({ onSignInClick, isLoggedIn, handleSignOut }) {
         <button
           className="nav__mobile-menu-home-btn"
           onClick={toggleMobileMenu}
-        ></button>
+        >
+          <img src={menubtn} alt="mobile btn" />
+        </button>
       )}
       {isLoggedIn && currentUser && isSavedArticles && (
         <button
           className="nav__mobile-menu-saved-btn"
           onClick={toggleMobileMenu}
-        ></button>
+        >
+          <img src={menubtns} alt="mobile btn" />
+        </button>
       )}
       {isShowMobileMenu && (
         <BurgerMenuToggle
@@ -92,8 +98,8 @@ function Navigation({ onSignInClick, isLoggedIn, handleSignOut }) {
           toggleMobileMenu={toggleMobileMenu}
           handleSignout={handleSignOut}
           isLoggedIn={isLoggedIn}
-          isHomeNewsArticlesPage={isHomeNewsArticlesPage}
-          isNewsArticlesSavedPage={isNewsArticlesSavedPage}
+          isHomeArticles={isHomeArticles}
+          isSavedArticles={isSavedArticles}
           currentUser={currentUser?.username}
         />
       )}

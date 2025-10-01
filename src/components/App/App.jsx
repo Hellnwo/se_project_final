@@ -101,6 +101,9 @@ function App() {
       console.log(article);
       console.log([...savedNewsArticles, article]);
       setSavedNewsArticles([...savedNewsArticles, article]);
+    })
+    .catch((err) => {
+      console.err(err.message, err);
     });
   }
 
