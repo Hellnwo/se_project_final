@@ -55,9 +55,14 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 780px) {
-  .modal {
-    width: 100%;
+@media screen and (max-width: 770px) {
+  .modal__content {
+    width: 90%;
+    max-width: 430px;
+    position: relative;
+    border-radius: 16px;
+    padding: 24px 36px;
+    box-sizing: border-box;
   }
 
   .modal__form {
@@ -65,17 +70,28 @@
   }
 }
 
-@media screen and (max-width: 595px) {
-  .modal {
-    align-items: flex-start;
-    margin-top: 56px;
-    z-index: 1002;
+@media screen and (max-width: 320px) {
+
+  .modal__content {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 100%;
+    position: absolute;
+    top: 56px;
+    left: 47%;
+    transform: translateX(-50%);
+    padding: 20px 16px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 1);
   }
 
   .modal__close {
+    position: absolute;
     width: 24px;
     height: 24px;
-    top: -45px;
-    right: 25px;
+    right: 20px;
+    cursor: pointer;
   }
 }
