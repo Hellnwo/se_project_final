@@ -1,4 +1,4 @@
-export const fakeSignIn = (email, password) => {
+export const SignIn = (email, password) => {
   if (!email || !password) {
     throw new Error('Email and password are required');
   }
@@ -29,8 +29,8 @@ export const fakeSignIn = (email, password) => {
   });
 };
 
-export const fakeSignUp = (name, email, password) => {
-   if (!name || !email || !password) {
+export const SignUp = (name, email, password) => {
+  if (!name || !email || !password) {
     throw new Error("All fields are required");
   }
 
@@ -47,10 +47,9 @@ export const fakeSignUp = (name, email, password) => {
 };
 
 export const checkFakeToken = (token) => {
- if (!token) {
+  if (!token) {
     throw new Error("No token provided");
   }
-
   const userStr = localStorage.getItem("user");
   if (!userStr) throw new Error("No user found");
 

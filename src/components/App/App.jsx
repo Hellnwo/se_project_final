@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
 import "./App.css";
@@ -14,8 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import SignUpSuccessModal from "../SignUpSucessModal/SignUpSuccessModal";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { signUp, signIn, handleToken } from "../../utils/api";
-import { checkFakeToken } from "../../utils/auth";
+import { checkFakeToken, SignUp, SignIn } from "../../utils/auth";
 import { getArticles, saveArticles } from "../../utils/NewsAPI";
 
 function App() {
@@ -58,23 +57,34 @@ function App() {
       });
   }
 
-  function handleSignIn({ email, password, username }) {
-    setIsLoading(true);
-    console.log({ email, password, username });
-    setIsLoggedIn(true);
-    setCurrentUser({ email: email, username: username });
-    setIsLoading(false);
-    closeActiveModal();
-  }
+  const handleSignIn = useCallback(async ({ email, password }) => {
+    try {
+      const response = await SignIn(email, password);
+      const token = response.user.token;
 
-  function handleSignUp({ email, password, username }) {
-    setIsLoading(true);
-    console.log({ email, password, username });
-    setIsLoggedIn(true);
-    setCurrentUser({ email: email, username: username });
-    setIsLoading(false);
-    closeActiveModal();
-  }
+      localStorage.setItem("jwt", token);
+
+      const userData = await checkFakeToken(token);
+      setCurrentUser(userData);
+      setIsLoggedIn(true);
+      closeAllModals();
+
+      const articles = await getArticles();
+      setSavedNewsArticles(articles);
+    } catch (err) {
+      console.error("Login error:", err);
+    }
+  }, []);
+
+  const handleSignUp = async ({ name, email, password }) => {
+    try {
+      await SignUp(name, email, password);
+      closeAllModals();
+      setIsSuccessModalOpen(true);
+    } catch (err) {
+      console.error("Registration error:", err);
+    }
+  };
 
   function handleSignOut() {
     setIsLoggedIn(false);
@@ -140,11 +150,22 @@ function App() {
     setActiveModal("sign-up-successfully");
   };
 
-  useEffect(() => {
-    checkFakeToken().then(({ data }) => {
-      setCurrentUser(data);
-    });
-  }, [isLoggedIn]);
+ useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkFakeToken(token)
+        .then((userData) => {
+          setCurrentUser({ name: userData.name, email: userData.email });
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error("Token check failed:", err);
+          localStorage.removeItem("jwt");
+          setIsLoggedIn(false);
+          setCurrentUser(null);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     if (!activeModal) return;
