@@ -1,4 +1,4 @@
-.main__saved-articles {
+.saved__articles {
   padding-top: 64px;
   padding-bottom: 46px;
   background-color: rgba(245, 246, 247, 1);
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 770px) {
-  .main__saved-articles {
+  .saved__articles {
     padding-top: 32px;
     padding-bottom: 32px;
     justify-content: center;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 425px) {
-  .main__saved-articles {
+  .saved__articles {
     padding-top: 24px;
     padding-bottom: 12px;
     background: rgba(245, 246, 247, 1);

@@ -8,7 +8,7 @@ function Footer() {
   return (
     <footer className="footer">
       <p className="footer__caption">© 2025 Supersite, Powered by News API</p>
-      <div className="footer__section">
+      <nav className="footer__section">
         <div className="footer__links">
           <Link to="/" className="footer__links-home">
             Home
@@ -22,7 +22,7 @@ function Footer() {
           </a>
         </div>
         <div className="footer__links-icons">
-          <a href="https://github.com/" className="footer__link-icons">
+          <a href="https://github.com/Hellnwo" className="footer__link-icons">
             <img src={github} alt="github icon" className="footer__link-icon" />
           </a>
           <a href="https://linkedin.com/" className="footer__link-icons">
@@ -33,7 +33,7 @@ function Footer() {
             />
           </a>
         </div>
-      </div>
+      </nav>
     </footer>
   );
 }

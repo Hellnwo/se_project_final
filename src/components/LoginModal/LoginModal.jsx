@@ -16,13 +16,13 @@ export default function LoginModal({
     password: "",
   };
 
- const { values, handleChange, errors, isValid, setValues, resetForm } =
+ const { values, handleChange, errors, isValid, resetForm } =
     useFormValidation(defaultValues);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (isValid) {
-      handleSignUp(values);
+      handleSignIn(values);
     }
 
     useEffect(() => {

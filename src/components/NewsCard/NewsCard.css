@@ -202,11 +202,10 @@
   color: rgba(26, 27, 34, 1);
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-box-clamp: 2;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  padding-bottom: 16px;
   margin: 0;
 }
 
@@ -220,9 +219,10 @@
   white-space: normal;
   margin: 0;
   padding-bottom: 30px;
+  padding-top: 16px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-box-clamp: 3;
+  -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -285,10 +285,10 @@
 @media screen and (max-width: 480px) {
   .newscard {
     width: 288px;
-    max-height: none;
+    height: 440px;
   }
   .newscard__image {
-    max-height: 196px;
+    height: 440px;
   }
 
   .newscard__save-btn {

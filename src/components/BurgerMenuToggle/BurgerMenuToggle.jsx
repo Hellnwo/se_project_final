@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import close from "../../assets/close.svg";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
-import logouta from "../../assets/logouta.svg";
+import logoutw from "../../assets/logoutw.svg";
 
 function BurgerMenuToggle({
   isShowMobileMenu,
@@ -85,7 +85,7 @@ function BurgerMenuToggle({
         >
           {currentUser.username}
           <img
-            src={logouta}
+            src={logoutw}
             alt="Sign-Out Button"
             className="nav-mobile-menu__links-signout-icon"
           />

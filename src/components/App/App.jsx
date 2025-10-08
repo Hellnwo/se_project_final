@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
 import "./App.css";
 
@@ -32,7 +32,7 @@ function App() {
   const [keywords, setKeywords] = useState([]);
 
   const navigate = useNavigate();
-
+  const location = useLocation();
 
   function handleSearchNewsArticles(news) {
     console.log("this is the news", news);
@@ -97,14 +97,15 @@ function App() {
     }
 
     article.keyword = keyword;
-    saveArticles(article).then(() => {
-      console.log(article);
-      console.log([...savedNewsArticles, article]);
-      setSavedNewsArticles([...savedNewsArticles, article]);
-    })
-    .catch((err) => {
-      console.err(err.message, err);
-    });
+    saveArticles(article)
+      .then(() => {
+        console.log(article);
+        console.log([...savedNewsArticles, article]);
+        setSavedNewsArticles([...savedNewsArticles, article]);
+      })
+      .catch((err) => {
+        console.err(err.message, err);
+      });
   }
 
   function handleDeleteNewsArticles(deletedArticle) {
@@ -121,7 +122,6 @@ function App() {
   function handleNewsArticlesCounts() {
     setNewsArticlesCounts((prevNews) => prevNews + 3);
   }
-
 
   const closeActiveModal = () => {
     setActiveModal("");
@@ -140,14 +140,12 @@ function App() {
     setActiveModal("sign-up-successfully");
   };
 
-
   useEffect(() => {
     checkFakeToken().then(({ data }) => {
       setCurrentUser(data);
     });
   }, [isLoggedIn]);
 
- 
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (evt) => {
@@ -167,14 +165,14 @@ function App() {
       document.removeEventListener("mousedown", handleOverlay);
     };
   }, [activeModal]);
-console.log(activeModal);
+  console.log(activeModal);
   return (
     <CurrentUserContext.Provider
       value={{ currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn }}
     >
       <div className="page">
         <div className="page__content">
-          <Routes>
+          <Routes location={location} key={location.pathname}>
             <Route
               path="/"
               element={
@@ -254,6 +252,5 @@ console.log(activeModal);
     </CurrentUserContext.Provider>
   );
 }
-
 
 export default App;

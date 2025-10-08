@@ -28,7 +28,7 @@ const fromDate = () => {
 };
 
 export function getSavedNewsArticles(article) {
-  return new Promise((res, reject) =>
+  return new Promise((res) =>
     res([
       {
         _id: "68c4d6457d7da285e5d0784d",
@@ -54,7 +54,7 @@ export function getSavedNewsArticles(article) {
 
 export function saveArticles(article) {
   console.log(article);
-  return new Promise((res, reject) => {
+  return new Promise((res) => {
     res({
       _id: "68c4d7a7bd725b5c7e2aa16d",
       urlToImage: article.urlToImage,
