@@ -29,7 +29,7 @@ export const fakeSignIn = (email, password) => {
   });
 };
 
-export const fakeSignUp = (email, password) => {
+export const fakeSignUp = (name, email, password) => {
    if (!name || !email || !password) {
     throw new Error("All fields are required");
   }
