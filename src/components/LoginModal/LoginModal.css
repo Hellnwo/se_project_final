@@ -1,0 +1,117 @@
+
+.modal__label {
+  font-family: "Inter", sans-serif, serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  padding-bottom: 31px;
+  color: rgba(47, 113, 229, 1);
+}
+
+.modal__input {
+ width: 100%;
+ padding-top: 9px;
+ opacity: 20%;
+ border: none;
+ border-bottom: 1px solid rgba(0, 0, 0, 1);
+ font-family: "Inter", sans-serif, serif;
+ font-weight: 400;
+ font-size: 14px;
+ line-height: 100%;
+ letter-spacing: 0%;
+ color: rgba(0, 0, 0, 1);
+ transition: border-color 0.4s ease, box-shadow 0.4s ease;
+ margin-bottom: 5px;
+}
+
+.modal__input::placeholder {
+  color: rgba(182, 188, 191, 1);
+  transition: color 10s ease-out;
+}
+
+.modal__input:focus::placeholder {
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal__input:focus {
+  outline: none;
+  box-shadow: 0 2px 4px rgba(47, 113, 229, 0.3);
+  border-bottom: 2px solid rgba(47, 113, 229, 1);
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal__btn_container {
+  display: block;
+}
+
+.modal__submit {
+  width: 100%;
+  max-width: 358px;
+  height: 64px;
+  border: none;
+  border-radius: 100px;
+  background-color: rgba(47, 113, 229, 1);
+  color: rgba(182, 188, 191, 1);
+  font-family: "Roboto", sans-serif, serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.modal__submit:hover {
+  background-color: rgba(52, 126, 255, 1);
+  box-shadow: 0 4px 7px rgba(52, 126, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.modal__submit_disabled {
+  background-color: rgba(230, 232, 235, 1);
+}
+
+.modal__btn_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+  margin-bottom: 0;
+}
+
+.modal__btn-text {
+  font-family: "Inter", sans-serif, serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  padding-right: 3px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal__sub-btn {
+  font-family: "Inter", sans-serif, serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  padding-right: 3px;
+  color: rgba(47, 113, 229, 1);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.modal__errors {
+  font-family: "Inter", "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgba(255, 0, 0, 1);
+}

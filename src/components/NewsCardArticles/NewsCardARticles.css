@@ -1,0 +1,16 @@
+.card-articles__selected {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding-left: 104px;
+  padding-right: 104px;
+}
+
+@media screen and (max-width: 780px) {
+  .card-articles__selected {
+    gap: 8px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}

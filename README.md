@@ -1,45 +1,14 @@
-# Final Project NewsExplorer
+# Project Rundown
+The NewsExplorer app allows one to search for news from anywhere via the NewsAPI integration. While browsing news you can always save your favorite articles as log as you're logged into the site!
 
-## Directory 
+# Github Deployment
+[NewsExplorer](https://hellnwo.github.io/se_project_final/)
 
-* Intro to Project
-* What's involved  
-  * Figma  
-  * VS Code
-  * CSS Techs 
-* Features  
-* Github Pages Link
-* Video Link
+# React + Vite
 
-### Intro to Project
-   
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### What's Involved
+Currently, two official plugins are available:
 
-  
-**Figma**  
-  
-Figma is a wonderful design tool that allows one to plan out their web design and share with a whole team to bring one's dreams to life. This software provides a visual key as well as measurements, element sizings, and more.
-* [Link to the project on Figma]  
-  
-**VS Code**  
-  
-  All markup and styling was done within this bit of software. A handy interface that allows coding to be done easily. Add extensions, know when your git projects have been modified/ added to the *hub*/ haven't been tracked yet, as well as easily see all of your files in one simple gui.
-
-**CSS Techs**
-
-* 
-* 
-* 
-* 
-
-### Features
-
-
-### Github Pages Link
-
-* 
-
-### Video Link
-
-* 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
