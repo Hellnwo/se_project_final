@@ -67,7 +67,7 @@ function App() {
       const userData = await checkFakeToken(token);
       setCurrentUser(userData);
       setIsLoggedIn(true);
-      closeAllModals();
+      closeActiveModal();
 
       const articles = await getArticles();
       setSavedNewsArticles(articles);
@@ -79,8 +79,7 @@ function App() {
   const handleSignUp = async ({ name, email, password }) => {
     try {
       await SignUp(name, email, password);
-      closeAllModals();
-      setIsSuccessModalOpen(true);
+      closeActiveModal();
     } catch (err) {
       console.error("Registration error:", err);
     }

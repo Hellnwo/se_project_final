@@ -218,7 +218,6 @@
   color: rgba(26, 27, 34, 1);
   white-space: normal;
   margin: 0;
-  padding-bottom: 30px;
   padding-top: 16px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -237,9 +236,7 @@
   color: rgba(182, 188, 191, 1);
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-bottom: 24px;
-  margin: 0;
-  margin-top: auto;
+  padding: 24px 0;
 }
 
 @media screen and (max-width: 770px) {
@@ -260,13 +257,13 @@
   }
 
   .newscard__content {
-    padding-right: 0;
+   height: 270px;
   }
 
   .newscard__content-title {
     font-size: 20px;
     line-height: 1.3;
-    margin: 12px 0 0;
+    margin-top: 16px;
   }
 
   .newscard__content-decription {
@@ -275,9 +272,15 @@
     -webkit-line-clamp: 3;
   }
 
-  .newscard__content-date, .newscard__content-source {
+  .newscard__content-date {
     padding: 0;
-    margin-top: 10px;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .newscard__content-source {
+    padding-top: 55px;
+    padding-bottom: 0;
     font-size: 14px;
   }
 }
@@ -285,7 +288,7 @@
 @media screen and (max-width: 480px) {
   .newscard {
     width: 288px;
-    height: 440px;
+    height: 444px;
   }
   .newscard__image {
     height: 440px;

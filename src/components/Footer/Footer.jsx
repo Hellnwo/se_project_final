@@ -1,4 +1,3 @@
-import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import linkedin from "../../assets/linkedin.svg";
@@ -29,7 +28,7 @@ function Footer() {
             <img
               src={linkedin}
               alt="linkedin icon"
-              className="footer__link-icons"
+              className="footer__link-icon"
             />
           </a>
         </div>

@@ -14,7 +14,7 @@ function SavedNews({
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <main className="saved__articles">
+    <main className="saved-news__articles">
       <NewsCardArticles
         isLoggedIn={isLoggedIn}
         currentUser={currentUser}

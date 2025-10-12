@@ -14,9 +14,3 @@
     padding-right: 40px;
   }
 }
-
-@media screen and (max-width: 350px) {
-  .card-articles__selected {
-    flex-direction: column;
-  }
-}

@@ -1,6 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import './LoginModal.css';
-import React, {useEffect} from "react";
 import useFormValidation from "../../hooks/useForm";
 
 export default function LoginModal({
@@ -24,12 +23,7 @@ export default function LoginModal({
     if (isValid) {
       handleSignIn(values);
     }
-
-    useEffect(() => {
-      if (isOpen) {
-        resetForm(defaultValues);
-      }
-    }, [isOpen]);
+    resetForm(defaultValues);
   };
 
   return (

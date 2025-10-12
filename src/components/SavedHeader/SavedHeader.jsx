@@ -1,5 +1,5 @@
 import "./SavedHeader.css";
-import { React, useContext } from "react";
+import { useContext } from "react";
 import Navigation from "../Navigation/Navigation";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -12,16 +12,16 @@ function SavedHeader({
   const { currentUser } = useContext(CurrentUserContext);
 
   return (
-    <header className="header header__saved">
+    <header className="header header-saved">
       <Navigation isLoggedIn={isLoggedIn} handleSignOut={handleSignOut} />
-      <div className="header__saved-section">
-        <h2 className="header__saved-title">Saved articles</h2>
-        <p className="header__saved-caption">
+      <div className="header-saved__section">
+        <h2 className="header-saved__title">Saved articles</h2>
+        <p className="header-saved__caption">
           {currentUser.username}, you have {savedNewsArticles.length} saved articles{" "}
         </p>
-        <p className="header__saved-keywords">
+        <p className="header-saved__keywords">
           By keywords:{" "}
-          <span className="header__saved-span-keywords">
+          <span className="header-saved__span-keywords">
             {keywords.length <= 2
               ? keywords.join(", ")
               : `${keywords[0]}, ${keywords[1]}, and ${

@@ -1,6 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
-import React, {useEffect} from "react";
 import useFormValidation from "../../hooks/useForm";
 
 export default function RegisterModal({
@@ -17,7 +16,7 @@ export default function RegisterModal({
     username: "",
   };
 
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormValidation(defaultValues);
 
   const handleSubmit = (evt) => {
@@ -25,13 +24,9 @@ export default function RegisterModal({
     if (isValid) {
       handleSignUp(values);
     }
-
-    useEffect(() => {
-      if (isOpen) {
-        resetForm(defaultValues);
-      }
-    }, [isOpen]);
+    resetForm(defaultValues);
   };
+
 
   return (
     <ModalWithForm

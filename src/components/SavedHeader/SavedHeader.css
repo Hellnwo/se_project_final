@@ -1,9 +1,9 @@
-.header__saved {
+.header-saved {
   color: rgba(0, 0, 0, 1);
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.header__saved-section {
+.header-saved__section {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -14,7 +14,7 @@
   background-color: rgba(250, 250, 250, 1);
 }
 
-.header__saved-title {
+.header-saved__title {
   font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 18px;
@@ -25,7 +25,7 @@
   max-width: 712px;
 }
 
-.header__saved-caption {
+.header-saved__caption {
   font-family: "Roboto Slab", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 40px;
@@ -36,7 +36,7 @@
   max-width: 530px;
 }
 
-.header__saved-keywords {
+.header-saved__keywords {
   font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 400;
   font-size: 18px;
@@ -46,7 +46,7 @@
   max-width: 712px;
 }
 
-.header__saved-span-keywords {
+.header-saved__span-keywords {
   font-family: "Roboto", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 18px;
@@ -56,22 +56,22 @@
 }
 
 @media screen and (max-width: 920px) {
-  .header__saved {
+  .header-saved {
     background-color: rgba(250, 250, 250, 1);
   }
   
-  .header__saved-section {
+  .header-saved__section {
     max-width: 596px;
     padding: 24px 40px 32px;
     background-color: rgba(250, 250, 250, 1);
   }
 
-  .header__saved-title {
+  .header-saved__title {
     font-size: 12px;
     line-height: 24px;
   }
 
-  .header__saved-caption {
+  .header-saved__caption {
     font-size: 30px;
     line-height: 34px;
   }
@@ -79,12 +79,12 @@
 
 @media screen and (max-width: 320px) {
 
-  .header__saved-title {
+  .header-saved__title {
     font-size: 12px;
     line-height: 24px;
   }
 
-  .header__saved-caption {
+  .header-saved_caption {
     font-size: 30px;
     line-height: 34px;
   }
